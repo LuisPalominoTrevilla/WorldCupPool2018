@@ -15,15 +15,18 @@ INSERT INTO user_type (name) VALUES ('admin'), ('user');
 CREATE TABLE event(
     event_id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     event_name VARCHAR(64) NOT NULL UNIQUE,
+    start_date DATETIME NOT NULL,
+    background VARCHAR(128) NOT NULL,
     PRIMARY KEY(event_id)
 ) ENGINE=INNODB, CHARACTER SET=UTF8;
 
-INSERT INTO event (event_name) VALUES('World Cup Russia 2018');
+INSERT INTO event (event_name, start_date, background) VALUES('World Cup Russia 2018', '2018-06-14 10:00:00', '/images/Events/wcbg.png');
 
 CREATE TABLE quiniela(
     code CHAR(5) NOT NULL,
     name VARCHAR(32) NOT NULL,
     event_id INTEGER UNSIGNED NOT NULL,
+    bet MEDIUMINT UNSIGNED NOT NULL,
     PRIMARY KEY (code),
     CONSTRAINT event_fk FOREIGN KEY (event_id) REFERENCES event(event_id)
     ON UPDATE CASCADE ON DELETE CASCADE
