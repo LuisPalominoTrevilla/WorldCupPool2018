@@ -2,6 +2,8 @@ CREATE DATABASE worldcuppool;
 
 GRANT ALL ON worldcuppool.* TO 'maestro'@'%' IDENTIFIED BY 'themaster';
 
+USE worldcuppool;
+
 CREATE TABLE user_type (
     type_id TINYINT(1) UNSIGNED NOT NULL AUTO_INCREMENT,
     name VARCHAR(16) NOT NULL UNIQUE,
@@ -11,7 +13,7 @@ CREATE TABLE user_type (
 INSERT INTO user_type (name) VALUES ('admin'), ('user');
 
 CREATE TABLE event(
-    event_id INTEGER NOT NULL AUTO_INCREMENT,
+    event_id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     event_name VARCHAR(64) NOT NULL UNIQUE,
     PRIMARY KEY(event_id)
 ) ENGINE=INNODB, CHARACTER SET=UTF8;
@@ -21,17 +23,17 @@ INSERT INTO event (event_name) VALUES('World Cup Russia 2018');
 CREATE TABLE quiniela(
     code CHAR(5) NOT NULL,
     name VARCHAR(32) NOT NULL,
-    event_id INTEGER NOT NULL,
+    event_id INTEGER UNSIGNED NOT NULL,
     PRIMARY KEY (code),
     CONSTRAINT event_fk FOREIGN KEY (event_id) REFERENCES event(event_id)
     ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=INNODB, CHARACTER SET=UTF8;
 
 CREATE TABLE user(
-    user_id INTEGER NOT NULL AUTO_INCREMENT,
+    user_id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     user_type TINYINT(1) UNSIGNED NOT NULL,
     username VARCHAR (32) NOT NULL UNIQUE,
-    password varchar(60) NOT NULL
+    password varchar(60) NOT NULL,
     quiniela_id CHAR(5),
     PRIMARY KEY (user_id),
     CONSTRAINT type_fk FOREIGN KEY (user_type) REFERENCES user_type(type_id)
@@ -42,13 +44,13 @@ CREATE TABLE user(
 
 INSERT INTO user (user_type, username, password) VALUES (1, 'root', '$2a$04$YcS86bxGTLV/aHDFfRv.ju3xwyaq3nUUXmA5kIZeWwhJpwQ8oTVg6');
 
-CREATE TABLE groupp(
+CREATE TABLE groups(
     group_id MEDIUMINT UNSIGNED NOT NULL,
     group_name VARCHAR(16) NOT NULL,
     PRIMARY KEY (group_id)
 ) ENGINE=INNODB, CHARACTER SET=UTF8;
 
-INSERT INTO groupp VALUES (1, 'A'), (2, 'B'), (3, 'C'), (4, 'D'), (5, 'E'), (6, 'F'), (7, 'G'), (8, 'H');
+INSERT INTO groups VALUES (1, 'A'), (2, 'B'), (3, 'C'), (4, 'D'), (5, 'E'), (6, 'F'), (7, 'G'), (8, 'H');
 
 CREATE TABLE result(
     result_id TINYINT(1) UNSIGNED NOT NULL,
@@ -64,7 +66,7 @@ CREATE TABLE team(
     flag VARCHAR(128) NOT NULL,
     belonging_group MEDIUMINT UNSIGNED,
     PRIMARY KEY (code),
-    CONSTRAINT grp_fk FOREIGN KEY (belonging_group) REFERENCES groupp(group_id)
+    CONSTRAINT grp_fk FOREIGN KEY (belonging_group) REFERENCES groups(group_id)
     ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=INNODB, CHARACTER SET=UTF8;
 
@@ -88,7 +90,7 @@ CREATE TABLE matches(
 
 CREATE TABLE bet(
     respective_match INTEGER UNSIGNED NOT NULL,
-    user INTEGER NOT NULL,
+    user INTEGER UNSIGNED NOT NULL,
     date_modified DATETIME,
     predicted_result TINYINT(1) UNSIGNED NOT NULL,
     points TINYINT(2) UNSIGNED NOT NULL DEFAULT 0,
