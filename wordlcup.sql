@@ -74,8 +74,8 @@ CREATE TABLE matches(
     match_id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     home_team CHAR(3) NOT NULL,
     away_team CHAR(3) NOT NULL,
-    local_goals TINYINT(2) UNSIGNED DEFAULT 0,
-    away_goals TINYINT(2) UNSIGNED DEFAULT 0,
+    local_goals TINYINT(2) UNSIGNED,
+    away_goals TINYINT(2) UNSIGNED,
     match_date DATETIME,
     result_id TINYINT(1) UNSIGNED,
     match_status TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
@@ -102,3 +102,117 @@ CREATE TABLE bet(
     CONSTRAINT rst_fk FOREIGN KEY (predicted_result) REFERENCES result(result_id)
     ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=INNODB, CHARACTER SET=UTF8;
+
+INSERT INTO team VALUES('EGY', 'Egipto', '/images/Flags/EGY.png', 1);
+INSERT INTO team VALUES('RUS', 'Rusia', '/images/Flags/RUS.png', 1);
+INSERT INTO team VALUES('SAU', 'Arabia Saudita', '/images/Flags/SAU.png', 1);
+INSERT INTO team VALUES('URY', 'Uruguay', '/images/Flags/URY.png', 1);
+
+INSERT INTO team VALUES('IRN', 'Irán', '/images/Flags/IRN.png', 2);
+INSERT INTO team VALUES('MAR', 'Marruecos', '/images/Flags/MAR.png', 2);
+INSERT INTO team VALUES('PRT', 'Portugal', '/images/Flags/PRT.png', 2);
+INSERT INTO team VALUES('ESP', 'España', '/images/Flags/ESP.png', 2);
+
+INSERT INTO team VALUES('AUS', 'Australia', '/images/Flags/AUS.png', 3);
+INSERT INTO team VALUES('DNK', 'Dinamarca', '/images/Flags/DNK.png', 3);
+INSERT INTO team VALUES('FRA', 'Francia', '/images/Flags/FRA.png', 3);
+INSERT INTO team VALUES('PER', 'Perú', '/images/Flags/PER.png', 3);
+
+INSERT INTO team VALUES('ARG', 'Argentina', '/images/Flags/ARG.png', 4);
+INSERT INTO team VALUES('HRV', 'Croacia', '/images/Flags/HRV.png', 4);
+INSERT INTO team VALUES('ISL', 'Islandia', '/images/Flags/ISL.png', 4);
+INSERT INTO team VALUES('NGA', 'Nigeria', '/images/Flags/NGA.png', 4);
+
+INSERT INTO team VALUES('BRA', 'Brasil', '/images/Flags/BRA.png', 5);
+INSERT INTO team VALUES('CRI', 'Costa Rica', '/images/Flags/CRI.png', 5);
+INSERT INTO team VALUES('SRB', 'Serbia', '/images/Flags/SRB.png', 5);
+INSERT INTO team VALUES('CHE', 'Suiza', '/images/Flags/CHE.png', 5);
+
+INSERT INTO team VALUES('DEU', 'Alemania', '/images/Flags/DEU.png', 6);
+INSERT INTO team VALUES('KOR', 'Corea del Sur', '/images/Flags/KOR.png', 6);
+INSERT INTO team VALUES('MEX', 'Mexico', '/images/Flags/MEX.png', 6);
+INSERT INTO team VALUES('SWE', 'Suecia', '/images/Flags/SWE.png', 6);
+
+INSERT INTO team VALUES('BEL', 'Bélgica', '/images/Flags/BEL.png', 7);
+INSERT INTO team VALUES('ENG', 'Inglaterra', '/images/Flags/ENG.png', 7);
+INSERT INTO team VALUES('PAN', 'Panamá', '/images/Flags/PAN.png', 7);
+INSERT INTO team VALUES('TUN', 'Túnez', '/images/Flags/TUN.png', 7);
+
+INSERT INTO team VALUES('COL', 'Colombia', '/images/Flags/COL.png', 8);
+INSERT INTO team VALUES('JPN', 'Japón', '/images/Flags/JPN.png', 8);
+INSERT INTO team VALUES('POL', 'Polonia', '/images/Flags/POL.png', 8);
+INSERT INTO team VALUES('SEN', 'Senegal', '/images/Flags/SEN.png', 8);
+
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('RUS', 'SAU', '2018-06-14 10:00:00');
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('EGY', 'URY', '2018-06-15 07:00:00');
+
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('MAR', 'IRN', '2018-06-15 10:00:00');
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('PRT', 'ESP', '2018-06-15 13:00:00');
+
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('FRA', 'AUS', '2018-06-16 05:00:00');
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('ARG', 'ISL', '2018-06-16 08:00:00');
+
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('PER', 'DNK', '2018-06-16 11:00:00');
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('HRV', 'NGA', '2018-06-16 14:00:00');
+
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('CRI', 'SRB', '2018-06-17 07:00:00');
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('DEU', 'MEX', '2018-06-17 10:00:00');
+
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('BRA', 'CHE', '2018-06-17 13:00:00');
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('SWE', 'KOR', '2018-06-18 07:00:00');
+
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('BEL', 'PAN', '2018-06-18 10:00:00');
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('TUN', 'ENG', '2018-06-18 13:00:00');
+
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('COL', 'JPN', '2018-06-19 07:00:00');
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('POL', 'SEN', '2018-06-19 10:00:00');
+
+
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('RUS', 'EGY', '2018-06-19 13:00:00');
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('PRT', 'MAR', '2018-06-20 07:00:00');
+
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('URY', 'SAU', '2018-06-20 10:00:00');
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('IRN', 'ESP', '2018-06-20 13:00:00');
+
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('DNK', 'AUS', '2018-06-21 07:00:00');
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('FRA', 'PER', '2018-06-21 10:00:00');
+
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('ARG', 'HRV', '2018-06-21 13:00:00');
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('BRA', 'CRI', '2018-06-22 07:00:00');
+
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('NGA', 'ISL', '2018-06-22 10:00:00');
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('SRB', 'CHE', '2018-06-22 13:00:00');
+
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('BEL', 'TUN', '2018-06-23 07:00:00');
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('KOR', 'MEX', '2018-06-23 10:00:00');
+
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('DEU', 'SWE', '2018-06-23 13:00:00');
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('ENG', 'PAN', '2018-06-24 07:00:00');
+
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('JPN', 'SEN', '2018-06-24 10:00:00');
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('POL', 'COL', '2018-06-24 13:00:00');
+
+
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('SAU', 'EGY', '2018-06-25 09:00:00');
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('URY', 'RUS', '2018-06-25 09:00:00');
+
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('IRN', 'PRT', '2018-06-25 13:00:00');
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('ESP', 'MAR', '2018-06-25 13:00:00');
+
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('AUS', 'PER', '2018-06-26 09:00:00');
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('DNK', 'FRA', '2018-06-26 09:00:00');
+
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('NGA', 'ARG', '2018-06-26 13:00:00');
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('ISL', 'HRV', '2018-06-26 13:00:00');
+
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('KOR', 'DEU', '2018-06-27 09:00:00');
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('MEX', 'SWE', '2018-06-27 09:00:00');
+
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('CHE', 'CRI', '2018-06-27 13:00:00');
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('SRB', 'BRA', '2018-06-27 13:00:00');
+
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('SEN', 'COL', '2018-06-28 09:00:00');
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('JPN', 'POL', '2018-06-28 09:00:00');
+
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('ENG', 'BEL', '2018-06-28 13:00:00');
+INSERT INTO matches (home_team, away_team, match_date) VALUES ('PAN', 'TUN', '2018-06-28 13:00:00');
