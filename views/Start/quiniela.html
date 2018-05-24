@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <title>Quiniela</title>
+        <link rel="stylesheet" type="text/css" href="/Bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/stylesheets/quiniela.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans|Vollkorn" rel="stylesheet">
+    </head>
+    <body>
+        
+        <form class="container">
+            <h1>Quinielas Online</h1>
+            <div class="form-text help-text">
+                <p>Seleccione el <b>evento</b> de su quiniela e ingrese el <b>monto</b> con el que cada participante entrará. Al terminar, presione generar.</p>
+            </div>
+        
+            <div>
+                <div class="form-row">    
+                    <label class="control-label col-sm-2 my-5 label" for="evento">Evento:</label>
+                    <div class="col-4">
+                        <select class="custom-select my-5" id="evento">
+                            <option selected>Mundial</option>
+                        </select>
+                    </div>
+
+                    <label class="control-label col-2 my-5 label" for="monto">Monto:</label>
+                    <div class="col-4">
+                        <input class="form-control my-5" id="monto" aria-describedby="help" placeholder="$0.0">
+                    </div>
+                    
+                </div>
+
+                <div class="row align-items-center justify-content-center">
+                    <button type="submit" class="btn btn-success btn-lg my-1 disabled" id="button">Generar</button>         
+                </div>
+            </div>
+        </form>    
+        
+    </body>
+    
+    <script src="/Javascript/quiniela.js"></script>
+</html>
