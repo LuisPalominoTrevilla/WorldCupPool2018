@@ -10,24 +10,24 @@
     </head>
     <body>
         
-        <form class="container">
+        <form class="container" method="post" action='/quiniela'>
             <h1>Quinielas Online</h1>
             <div class="form-text help-text">
                 <p>Seleccione el <b>evento</b> de su quiniela e ingrese el <b>monto</b> con el que cada participante entrará. Al terminar, presione generar.</p>
             </div>
         
             <div>
-                <div class="form-row">    
+                <div class="form-row">
                     <label class="control-label col-sm-2 my-5 label" for="evento">Evento:</label>
                     <div class="col-4">
-                        <select class="custom-select my-5" id="evento">
-                            <option selected>Mundial</option>
+                        <select class="custom-select my-5" id="evento" name="event">
+                            <option selected>Evento</option>
                         </select>
                     </div>
 
                     <label class="control-label col-2 my-5 label" for="monto">Monto:</label>
                     <div class="col-4">
-                        <input class="form-control my-5" id="monto" aria-describedby="help" placeholder="$0.0">
+                        <input class="form-control my-5" id="monto" aria-describedby="help" placeholder="$0.0" name="monto">
                     </div>
                     
                 </div>

@@ -1,6 +1,21 @@
-$("#monto").keyup(function(){
+$("#monto").keyup(checkInput);
+
+$("#evento").click(checkInput);
+
+
+$.getJSON("/api/events", function(data){
+    let options ="";
+    $.each(data, function(key,value){
+        options += "<option>" +value.event_name+ "</option>";
+        $("#evento").append(options);
+    });
+});
+
+function checkInput(){
     var monto = $("#monto").val();
-    if(monto!=""){
+    var evento = $("#evento").val();
+    console.log(evento);
+    if( !isNaN(monto) && evento!="Evento"){
         $("#button").removeClass("disabled");
         $("#button").addClass("enabled");
     }
@@ -8,9 +23,4 @@ $("#monto").keyup(function(){
         $("#button").addClass("disabled");
         $("#button").removeClass("enabled");
     }
-    console.log(monto);
-});
-
-$.getJSON("/api/events", function(data){
-    console.log(data);
-});
+}
