@@ -1,0 +1,31 @@
+body{
+    background-image: url("/images/Quiniela/ball-for-success.jpg");
+    text-align: center;
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-attachment: fixed;
+    font-size: 22px;
+	font-family: "Open Sans",serif;
+}
+
+h1{
+    padding-bottom: 10px;
+    font-family: "Abel", Arial, sans-serif;
+    font-weight: 400;
+	font-size: 36px;
+}
+
+.container{
+    margin-top:10%;
+    padding-bottom: 350px;
+    padding-top: 20px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.9);
+    max-width: 600px;
+}
+
+
+.help-text{
+    color: gray;
+    padding-top: 10px;
+}

@@ -16,6 +16,12 @@ router.get('/events', function(req, res, next){
   });
 });
 
+/* GET THE SUCCESS*/
+router.get('/success', function(req, res, next) {
+    res.send("hola");
+    res.render('Start/success');
+});
+
 /* GET THE TEAMS */
 router.get('/gTEAMS', function(req, res, next) {
   console.log('Request to the unknown');
