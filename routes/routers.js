@@ -5,17 +5,8 @@ var bcrypt = require('bcrypt');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-
-  con.query("SELECT * FROM groups", function (err, result, fields) {
-    if (err) throw err;
-    res.json(result);
-  });
-    /*con.connect(function(err){
-    if(err) throw err;
-    console.log('connected');
-  }); */
-    
-    //res.render('index', { title: 'Express' });
+  res.render('Start/quiniela.html');
+  //res.render('index', { title: 'Express' });
 });
 
 router.get('/login', function(req, res, next) {

@@ -9,7 +9,12 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET THE events */
-
+router.get('/events', function(req, res, next){
+  con.query("SELECT event_name, event_id FROM event", function (err, result, fields) {
+    if (err) throw err;
+    res.json(result);
+  });
+});
 
 /* GET THE TEAMS */
 router.get('/gTEAMS', function(req, res, next) {
