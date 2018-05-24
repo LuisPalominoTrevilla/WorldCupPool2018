@@ -10,14 +10,12 @@ router.get('/', function(req, res, next) {
     if (err) throw err;
     res.json(result);
   });
-
-  /* con.connect(function(err){
+    /*con.connect(function(err){
     if(err) throw err;
     console.log('connected');
-
+  }); */
     
     //res.render('index', { title: 'Express' });
-  }); */
 });
 
 router.get('/login', function(req, res, next) {
