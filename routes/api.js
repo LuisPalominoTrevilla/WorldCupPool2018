@@ -1,4 +1,5 @@
 var express = require('express');
+var con = require('../database');
 var router = express.Router();
 
 /* GET users listing. */
@@ -6,6 +7,9 @@ router.get('/', function(req, res, next) {
   res.send('API is alive');
   
 });
+
+/* GET THE events */
+
 
 /* GET THE TEAMS */
 router.get('/gTEAMS', function(req, res, next) {
