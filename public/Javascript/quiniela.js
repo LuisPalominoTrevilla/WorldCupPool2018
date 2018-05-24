@@ -6,8 +6,10 @@ $("#evento").click(checkInput);
 $.getJSON("/api/events", function(data){
     let options ="";
     $.each(data, function(key,value){
-        options += "<option>" +value.event_name+ "</option>";
-        $("#evento").append(options);
+        $('#evento').append($('<option>', {
+            value: value.event_id,
+            text: value.event_name
+        }));
     });
 });
 

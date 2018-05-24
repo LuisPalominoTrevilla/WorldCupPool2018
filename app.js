@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');           // Use express session
 var logger = require('morgan');
+var bodyParser = require('body-parser');
 
 var mainRouter = require('./routes/routers');
 var apiRouter = require('./routes/api');
@@ -28,6 +29,10 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }));
+
+// Body parser for the post requests
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
 
 // Select static folder
 app.use(express.static(path.join(__dirname, 'public')));
