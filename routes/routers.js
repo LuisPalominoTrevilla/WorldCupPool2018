@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var randomstring = require("randomstring");
 var bcrypt = require('bcrypt');
-var mysql = require('mysql');
+var pool = require('../database');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -27,50 +27,46 @@ router.get('/quiniela', function(req, res, next) {
 
 /* POST quiniela */
 router.post('/quiniela', function(req, res, next) {
-  
-  // Database connection
-  var con = mysql.createConnection({
-    host: "18.219.147.253",
-    user: "maestro",
-    password: "themaster",
-    database: "worldcuppool"
-  });
 
   // Get post parameters
   var ev_id = parseInt(req.body.event);
   var cost = parseInt(req.body.monto);
 
-  con.query("SELECT code FROM quiniela", function(err, result) {
-    if (err) throw err;
-    var quiniela_codes = result;
-
-    while(true){
-      var new_code = randomstring.generate({
-        length: 5,
-        capitalization: 'uppercase'
-      });
-      var repeated = false;
-      for(var i = 0; i < quiniela_codes.length; i++){
-        if(new_code === quiniela_codes[i].code){
-          console.log('Repeated code');
-          repeated = true;
+  pool.getConnection(function(err, con) {
+    con.query("SELECT code FROM quiniela", function(err, result) {
+      if (err) throw err;
+      var quiniela_codes = result;
+  
+      while(true){
+        var new_code = randomstring.generate({
+          length: 5,
+          capitalization: 'uppercase'
+        });
+        var repeated = false;
+        for(var i = 0; i < quiniela_codes.length; i++){
+          console.log(quiniela_codes[i].code);
+          if(new_code === quiniela_codes[i].code){
+            console.log('Repeated code');
+            repeated = true;
+            break;
+          }
+        }
+        if(!repeated){
+          var sql = "INSERT INTO quiniela (code, name, event_id, bet) VALUES ?";
+          var values = [[new_code, 'Quiniela', ev_id, cost]];
+          con.query(sql, [values], function(err, result) {
+            if (err) throw err;
+            // Render page
+            var success_page = '/success?code='+new_code;
+            
+            // Redirect to avoid POST problems
+            res.redirect(success_page);
+            con.release();
+          });
           break;
         }
       }
-      if(!repeated){
-        var sql = "INSERT INTO quiniela (code, name, event_id, bet) VALUES ?";
-        var values = [[new_code, 'Quiniela', ev_id, cost]];
-        con.query(sql, [values], function(err, result) {
-          if (err) throw err;
-          // Render page
-          var success_page = '/success?code='+new_code;
-
-          // Redirect to avoid POST problems
-          res.redirect(success_page);
-        });
-        break;
-      }
-    }
+    });
   });
 });
 

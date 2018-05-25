@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var mysql = require('mysql');
+var pool = require('../database');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -10,46 +10,35 @@ router.get('/', function(req, res, next) {
 
 /* GET THE events */
 router.get('/events', function(req, res, next){
-
-  // Database connection
-  var con = mysql.createConnection({
-    host: "18.219.147.253",
-    user: "maestro",
-    password: "themaster",
-    database: "worldcuppool"
-  });
-
-  con.query("SELECT event_name, event_id FROM event", function (err, result) {
-    if (err) throw err;
-    res.json(result);
+  pool.getConnection(function(err, con) {
+    con.query("SELECT event_name, event_id FROM event", function (err, result) {
+      if (err) throw err;
+      res.json(result);
+      con.release();
+    });
   });
 });
 
+/* GET users */
 router.get('/users', function(req, res, next) {
-  var con = mysql.createConnection({
-    host: "18.219.147.253",
-    user: "maestro",
-    password: "themaster",
-    database: "worldcuppool"
+  pool.getConnection(function(err, con) {
+    con.query("SELECT username FROM user", function(err, result) {
+      if (err) throw err;
+      res.json(result);
+      con.release();
+    });
   });
-
-  con.query("SELECT username FROM user", function(err, result) {
-    if (err) throw err;
-    res.json(result);
-  });
+  
 });
 
+/* GET quinielas */
 router.get('/quinielas', function(req, res, next) {
-  var con = mysql.createConnection({
-    host: "18.219.147.253",
-    user: "maestro",
-    password: "themaster",
-    database: "worldcuppool"
-  });
-
-  con.query("SELECT code FROM quiniela", function(err, result) {
-    if (err) throw err;
-    res.json(result);
+  pool.getConnection(function(err, con) {
+    con.query("SELECT code FROM quiniela", function(err, result) {
+      if (err) throw err;
+      res.json(result);
+      con.release();
+    });
   });
 });
 
