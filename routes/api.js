@@ -19,7 +19,35 @@ router.get('/events', function(req, res, next){
     database: "worldcuppool"
   });
 
-  con.query("SELECT event_name, event_id FROM event", function (err, result, fields) {
+  con.query("SELECT event_name, event_id FROM event", function (err, result) {
+    if (err) throw err;
+    res.json(result);
+  });
+});
+
+router.get('/users', function(req, res, next) {
+  var con = mysql.createConnection({
+    host: "18.219.147.253",
+    user: "maestro",
+    password: "themaster",
+    database: "worldcuppool"
+  });
+
+  con.query("SELECT username FROM user", function(err, result) {
+    if (err) throw err;
+    res.json(result);
+  });
+});
+
+router.get('/quinielas', function(req, res, next) {
+  var con = mysql.createConnection({
+    host: "18.219.147.253",
+    user: "maestro",
+    password: "themaster",
+    database: "worldcuppool"
+  });
+
+  con.query("SELECT code FROM quiniela", function(err, result) {
     if (err) throw err;
     res.json(result);
   });
