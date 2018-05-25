@@ -11,14 +11,14 @@
     <body>
         
         <div class="container" method="post" action='/quiniela'>
-            <p class="help-text">EL id de su quiniela es:</p>
-            <h1>123402039329</h1>
+            <p class="help-text">EL código de su quiniela es:</p>
+            <h1><%= code %></h1>
             <div class="form-text help-text">
-                <p>Dale este id a quien quieras que ingrese a tu quiniela</p>
+                <p>Entrega este código a quien quiera que ingrese a su quiniela!</p>
             </div>
             
             <div>
-                <button type="button" class="btn btn-success btn-lg">Regístrate</button>
+                <button type="button" class="btn btn-success btn-lg" onclick="window.location.href='/register'">Regístrate</button>
             </div>
         </div>    
     </body>

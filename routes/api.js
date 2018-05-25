@@ -16,14 +16,8 @@ router.get('/events', function(req, res, next){
   });
 });
 
-/* GET THE SUCCESS*/
-router.get('/success', function(req, res, next) {
-    res.send("hola");
-    res.render('Start/success');
-});
-
 /* GET THE TEAMS */
-router.get('/gTEAMS', function(req, res, next) {
+/* router.get('/gTEAMS', function(req, res, next) {
   console.log('Request to the unknown');
   if(req.session && req.session.authenticated){
     res.send('respond with a resource');
@@ -31,6 +25,6 @@ router.get('/gTEAMS', function(req, res, next) {
     req.session.authenticated=true;
     res.redirect('/login');
   }
-});
+}); */
 
 module.exports = router;

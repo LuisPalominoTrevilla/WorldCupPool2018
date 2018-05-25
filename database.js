@@ -7,11 +7,4 @@ var con = mysql.createConnection({
     database: "worldcuppool"
   });
 
-  con.connect(function(err){
-    if(!err) {
-        console.log("Database is connected ...");    
-    } else {
-        console.log("Error connecting database ...");    
-    }
-    });
   module.exports = con;

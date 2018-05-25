@@ -10,10 +10,22 @@ router.get('/', function(req, res, next) {
   //res.render('index', { title: 'Express' });
 });
 
+/* GET login */
+router.get('/login', function(req, res, next) {
+  res.send('Aqui se inicia sesión');
+});
+
+/* GET register */
+router.get('/register', function(req, res, next) {
+  res.render('Start/register.html');
+});
+
+/* GET quiniela */
 router.get('/quiniela', function(req, res, next) {
   res.render('Start/quiniela.html');
 });
 
+/* POST quiniela */
 router.post('/quiniela', function(req, res, next) {
   var ev_id = parseInt(req.body.event);
   var cost = parseInt(req.body.monto);
@@ -41,8 +53,7 @@ router.post('/quiniela', function(req, res, next) {
         con.query(sql, [values], function(err, result) {
           if (err) throw err;
           // Render page
-          res.send(new_code);
-          //res.render('Start/success', {code: new_code});
+          res.render('Start/success', {code: new_code});
         });
         break;
       }
@@ -50,7 +61,7 @@ router.post('/quiniela', function(req, res, next) {
   });
 });
 
-router.get('/login', function(req, res, next) {
+/* router.get('/login', function(req, res, next) {
   bcrypt.hash('themaster', 11, function( err, bcryptedPassword) {
     bcrypt.compare('themaster', bcryptedPassword, function(err, doesMatch){
       if (doesMatch){
@@ -60,9 +71,6 @@ router.get('/login', function(req, res, next) {
       }
      });
  });
-
- 
-  
-});
+}); */
 
 module.exports = router;
