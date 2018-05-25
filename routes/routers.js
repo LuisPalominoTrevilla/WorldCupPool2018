@@ -6,8 +6,7 @@ var pool = require('../database');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.send('Welcome');
-  //res.render('index', { title: 'Express' });
+  res.render('index.html');
 });
 
 /* GET login */
