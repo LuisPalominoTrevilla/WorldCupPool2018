@@ -10,8 +10,10 @@ router.get('/', function(req, res, next) {
 
 /* GET THE events */
 router.get('/events', function(req, res, next){
+  console.log('Started route');
   pool.getConnection(function(err, con) {
     con.query("SELECT event_name, event_id FROM event", function (err, result) {
+      console.log('Got the results');
       if (err) throw err;
       res.json(result);
       con.release();

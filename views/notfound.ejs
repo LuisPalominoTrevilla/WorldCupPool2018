@@ -3,27 +3,25 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <title>Quiniela</title>
+        <title>Not Found</title>
         <link rel="stylesheet" type="text/css" href="/Bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="/stylesheets/success.css">
+        <link rel="stylesheet" type="text/css" href="/stylesheets/notfound.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|Vollkorn" rel="stylesheet">
     </head>
     <body>
         
         <div class="vertical-center">
             <div class="container" method="post" action='/quiniela'>
-                <p class="help-text">EL código de tu quiniela es:</p>
+                <p class="help-text">ERROR:</p>
                 <h1><%= code %></h1>
                 <div class="form-text help-text">
-                    <p>Entrega este código a quien quieras que ingrese a tu quiniela!</p>
+                    <p>Esta página NO existe. Cuida donde te metes</p>
                 </div>
                 
                 <div>
-                    <button type="button" class="btn btn-success btn-lg" onclick="window.location.href='/register'">Regístrate</button>
+                    <button type="button" class="btn btn-success btn-lg" onclick="window.location.href='/'">Regresar</button>
                 </div>
             </div>
         </div>    
     </body>
-    
-    <script src="/Javascript/success.js"></script>
 </html>
