@@ -2,6 +2,7 @@
 <html lang="es">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <title>Quiniela</title>
         <link rel="stylesheet" type="text/css" href="/Bootstrap/css/bootstrap.min.css">
@@ -17,18 +18,15 @@
             </div>
         
             <div>
-                <div class="form-row">
-                    <label class="control-label col-sm-2 my-5 label" for="evento">Evento:</label>
-                    <div class="col-4">
-                        <select class="custom-select my-5" id="evento" name="event">
+                <div class="form-inline my-5">    
+                    
+                    <label class="control-label label col-md-2 col-sm-5 col-xs-5 my-1" for="evento">Evento:</label>
+                    <select class="custom-select col-md-4 col-sm-7 col-xs-7 my-1" id="evento" name="event">
                             <option selected>Evento</option>
-                        </select>
-                    </div>
-
-                    <label class="control-label col-2 my-5 label" for="monto">Monto:</label>
-                    <div class="col-4">
-                        <input class="form-control my-5" id="monto" aria-describedby="help" placeholder="$0.0" name="monto">
-                    </div>
+                    </select>
+                    
+                    <label class="control-label label col-md-2 col-sm-5 col-xs-5 my-1" for="monto">Monto:</label>
+                    <input class="form-control col-md-4 col-sm-7 col-xs-7 my-1" id="monto" aria-describedby="help" placeholder="$0.0" name="monto">
                     
                 </div>
 
