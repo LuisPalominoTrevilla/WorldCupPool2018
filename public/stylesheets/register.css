@@ -1,0 +1,49 @@
+body{
+    background-image: url("/images/Quiniela/rusia-world-cup.jpg");
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-attachment: fixed;
+    font-size: 22px;
+	font-family: "Open Sans",serif;
+}
+
+h1{
+    padding-top: 20px;
+    padding-bottom: 10px;
+    font-family: "Abel", Arial, sans-serif;
+    font-weight: 400;
+	font-size: 36px;
+}
+
+.container{
+    margin-top:10%;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.9);
+    width:600px;
+    max-width: 80vw;
+    
+}
+
+#evento{
+    font-size:15px;
+}
+
+@media all and (min-width: 960px) {
+    body{
+        font-size: 24px;
+    }
+}
+ 
+@media all and (max-width: 959px) and (min-width: 600px) {
+    body{
+        font-size: 18px;
+    }
+}
+ 
+@media all and (max-width: 599px) and (min-width: 320px) {
+    body{
+        font-size: 16px;
+    }
+ 
+}
