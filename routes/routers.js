@@ -42,17 +42,16 @@ router.post('/quiniela', function(req, res, next) {
 
   con.query("SELECT code FROM quiniela", function(err, result) {
     if (err) throw err;
-    var quiniela_codes = JSON.stringify(result);
+    var quiniela_codes = result;
 
     while(true){
       var new_code = randomstring.generate({
         length: 5,
         capitalization: 'uppercase'
       });
-      console.log(new_code);
       var repeated = false;
-      for(var code in quiniela_codes){
-        if(new_code === quiniela_codes[code]){
+      for(var i = 0; i < quiniela_codes.length; i++){
+        if(new_code === quiniela_codes[i].code){
           console.log('Repeated code');
           repeated = true;
           break;
