@@ -25,6 +25,9 @@ h1{
     
 }
 
+#evento{
+    font-size:15px;
+}
 
 .help-text{
     padding: 5px;
@@ -32,7 +35,7 @@ h1{
 
 @media all and (min-width: 960px) {
     body{
-        font-size: 22px;
+        font-size: 24px;
     }
 }
  
