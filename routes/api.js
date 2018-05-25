@@ -1,6 +1,6 @@
 var express = require('express');
-var con = require('../database');
 var router = express.Router();
+var mysql = require('mysql');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -10,6 +10,15 @@ router.get('/', function(req, res, next) {
 
 /* GET THE events */
 router.get('/events', function(req, res, next){
+
+  // Database connection
+  var con = mysql.createConnection({
+    host: "18.219.147.253",
+    user: "maestro",
+    password: "themaster",
+    database: "worldcuppool"
+  });
+
   con.query("SELECT event_name, event_id FROM event", function (err, result, fields) {
     if (err) throw err;
     res.json(result);
