@@ -28,7 +28,8 @@ h1{
     padding-bottom: 20px;
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.9);
-    max-width: 600px;
+    width: 600px;
+    max-width: 80vw;
 }
 
 .help-text{

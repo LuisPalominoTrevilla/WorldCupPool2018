@@ -19,6 +19,35 @@ router.get('/register', function(req, res, next) {
   res.render('Start/register.html');
 });
 
+/* POST register */
+router.post('/register', function(req, res, next) {
+
+  // Get POST parameters
+  var username = req.body.username;
+  var pswd = req.body.password;
+  var quiniela = req.body.quiniela;
+
+  bcrypt.hash(pswd, 11, function( err, bcryptedPassword) {
+    if (err) throw err;
+    pool.getConnection(function(err, con) {
+      var sql = "INSERT INTO user (user_type, username, password, quiniela_id) VALUES ?";
+      var VALUES=[
+        [2, username, bcryptedPassword, quiniela]
+      ];
+      con.query(sql, [VALUES], function(err, result) {
+        if(err){
+          res.redirect('/register');
+        }else{
+          // Redirect to avoid POST problems
+          res.redirect('/login');
+        }
+        con.release();
+      });
+    });
+  });
+
+});
+
 /* GET quiniela */
 router.get('/quiniela', function(req, res, next) {
   res.render('Start/quiniela.html');
@@ -27,7 +56,7 @@ router.get('/quiniela', function(req, res, next) {
 /* POST quiniela */
 router.post('/quiniela', function(req, res, next) {
 
-  // Get post parameters
+  // Get POST parameters
   var ev_id = parseInt(req.body.event);
   var cost = parseInt(req.body.monto);
 
