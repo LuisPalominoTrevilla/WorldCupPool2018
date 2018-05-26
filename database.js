@@ -5,7 +5,7 @@ var pool = mysql.createPool({
     user: "maestro",
     password: "themaster",
     database: "worldcuppool",
-    acquireTimeout: 1500
+    acquireTimeout: 1000
 });
 
 module.exports=pool;

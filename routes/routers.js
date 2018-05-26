@@ -104,6 +104,14 @@ router.get('/success', function(req, res, next) {
   res.render('Start/success', {code: new_code});
 });
 
+/* router.get('/:id', function(req, res, next) {
+  var id = req.params.id;
+  if(req.session && req.session.id == id){
+    res.send('El valor que mandaste es ' + id);
+  }
+  next();
+}); */
+
 /* router.get('/login', function(req, res, next) {
   bcrypt.hash('themaster', 11, function( err, bcryptedPassword) {
     bcrypt.compare('themaster', bcryptedPassword, function(err, doesMatch){

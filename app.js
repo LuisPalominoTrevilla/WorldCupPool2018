@@ -41,7 +41,8 @@ app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  res.render('notfound', {code: '404'});
+  res.status(404);
+  res.render('notfound', {code: '404', url: req.url});
 });
 
 module.exports = app;
