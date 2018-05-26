@@ -36,6 +36,7 @@ router.get('/users', function(req, res, next) {
 /* GET quinielas */
 router.get('/quinielas', function(req, res, next) {
   pool.getConnection(function(err, con) {
+    if(err) throw err;
     con.query("SELECT code FROM quiniela", function(err, result) {
       if (err) throw err;
       res.json(result);

@@ -41,6 +41,24 @@ app.use(bodyParser.json());
 // Select static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
+var authenticate = function(req, res, next){
+  if(req.url === '/quiniela/master' && (!req.session || !req.session.authenticated || !req.session.master)){
+    res.status(403);
+    req.flash('msg', 'Por favor inicia sesión antes de continuar');
+    res.redirect('/login');
+    return;
+  }else if(req.url === '/quiniela' && (!req.session || !req.session.authenticated || req.session.master)){
+    res.status(403);
+    req.flash('msg', 'Por favor inicia sesión antes de continuar');
+    res.redirect('/login');
+    return;
+  }
+  
+  next();
+}
+
+// Handle unauthorized requests to pages without permission
+app.use(authenticate);
 app.use('/quiniela', quinielaRouter);
 app.use('/api', apiRouter);
 app.use('/', mainRouter);

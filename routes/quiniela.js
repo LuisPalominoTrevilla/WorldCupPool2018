@@ -8,6 +8,10 @@ router.get('/', function(req, res, next) {
     res.send('Bienvenido ' + req.session.username + " quiniela: " + req.session.quiniela + ' evento: ' + req.session.event + ' bk: ' + req.session.background + ' on ' + req.session.event_date);
 });
 
+/* GET master account content */
+router.get('/master', function(req, res, next) {
+  res.send('Welcome Admin ' + req.session.username);
+});
 /* router.get('/:id', function(req, res, next) {
   var id = req.params.id;
   if(req.session && req.session.id == id){
