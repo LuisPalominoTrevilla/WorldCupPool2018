@@ -1,0 +1,24 @@
+.header{
+    padding: 0;
+}
+
+.top-bar{
+    background-color: #fff;
+    padding: .3rem;
+}
+
+.participants-bar{
+    height: 5rem;
+    background-color: #043c60;
+    background-image: url('/images/Events/blue.png')
+}
+
+#flash_msg{
+    color: red;
+    font-size: 18px;
+}
+
+.user-btn{
+    
+}
+

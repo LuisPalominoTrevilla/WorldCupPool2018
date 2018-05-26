@@ -4,8 +4,7 @@ var pool = require('../database');
 
 /* GET user dashboard page */
 router.get('/', function(req, res, next) {
-    console.log(req.session.event_date);
-    res.send('Bienvenido ' + req.session.username + " quiniela: " + req.session.quiniela + ' evento: ' + req.session.event + ' bk: ' + req.session.background + ' on ' + req.session.event_date);
+  res.render('Quiniela/dashboard', {username: req.session.username, background: req.session.background, event: req.session.event});
 });
 
 /* GET master account content */

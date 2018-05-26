@@ -25,8 +25,9 @@ router.post('/login', function(req, res, next) {
 
   if (username != "" && pswd != ""){    // Check if username and password are not empty
     // Retrieve hashed password from database
+    console.log(pool._allConnections.length);
     pool.getConnection(function(err, con) {
-      
+      console.log(pool._allConnections.length);
       sql = "SELECT password, code, event_name, background, start_date FROM user LEFT JOIN quiniela ON quiniela_id = code LEFT JOIN event ON event.event_id = quiniela.event_id WHERE username = " + mysql.escape(username);
       con.query(sql, function(err, result) {
         if(err) throw err;

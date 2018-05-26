@@ -1,0 +1,53 @@
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+         <script src="/Javascript/jQuery/jquery-3.3.1.min.js"></script>
+        <title><%= username %></title>
+        <script src="/Javascript/popper.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="/Bootstrap/css/bootstrap.min.css">
+        <script src="/Bootstrap/js/bootstrap.js"></script>
+        <link rel="stylesheet" type="text/css" href="/stylesheets/dashboard.css">
+        <style>
+            body{
+                background-image: url('<%= background %>');
+                background-repeat:no-repeat;
+                background-size:cover;
+                background-attachment: fixed;
+                background-position: right bottom;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid header">
+            <div class="top-bar">
+                <div class="row">
+                    <div class="col-md-4">
+                            <div class="event_name">
+                                <p><%= event %></p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <p>Tiempo hasta la competencia: <span id="time">00:00:00</span></p>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="dropdown text-right">
+                                    <a class="btn dropdown-toggle user-btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <%= username %>
+                                    </a>
+                                    
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <a class="dropdown-item" href="#">Logout</a>
+                                    </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <div class="participants-bar">
+
+            </div>
+        </div>
+        
+        
+    </body>
+</html>
