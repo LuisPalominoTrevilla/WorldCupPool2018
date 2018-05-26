@@ -1,0 +1,90 @@
+body{
+    background-image: url("/images/Quiniela/chilena.jpg");
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-attachment: fixed;
+    font-size: 22px;
+	font-family: "Open Sans",serif;
+}
+
+#flash_msg{
+    color: red;
+    font-size: 18px;
+}
+
+.vertical-center {
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 100vh; /* These two lines are counted as one :-)       */
+  
+    display: flex;
+    align-items: center;
+}
+
+h1{
+    padding-top: 20px;
+    padding-bottom: 10px;
+    border-bottom: solid 1px #444;
+    font-family: "Vollkorn", sans-serif;
+    font-weight: 400;
+    font-size: 36px;
+    margin-bottom: 2rem;
+}
+
+.form-group{
+    padding: 0 8rem 0 8rem;
+}
+
+.container{
+    padding-bottom: 5px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.9);
+    width:600px;
+    max-width: 80vw;
+}
+
+#evento{
+    font-size:15px;
+}
+
+.btn-danger{
+    margin-right: 10px;
+}
+
+.btn{
+    margin-top: 20px !important;
+}
+
+@media all and (min-width: 960px) {
+    body{
+        font-size: 20px;
+    }
+}
+ 
+@media all and (max-width: 959px) and (min-width: 600px) {
+    body, #flash_msg{
+        font-size: 16px;
+    }
+    h1{
+        font-size: 32px;
+    }
+    .form-group{
+        padding: 0;
+    }
+}
+ 
+@media all and (max-width: 599px) and (min-width: 320px) {
+    body, #flash_msg{
+        font-size: 14px;
+    }
+    h1{
+        font-size: 28px;
+    }
+    .btn{
+        width: 6rem;
+        font-size: 1rem;
+    }
+    .form-group{
+        padding: 0;
+    }
+ 
+}

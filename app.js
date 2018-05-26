@@ -2,11 +2,13 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');           // Use express session
+var flash = require('express-flash');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 
 var mainRouter = require('./routes/routers');
 var apiRouter = require('./routes/api');
+var quinielaRouter = require('./routes/quiniela');
 
 var app = express();
 
@@ -29,6 +31,9 @@ app.use(session({
   saveUninitialized: true
 }));
 
+// Configure flash messages
+app.use(flash());
+
 // Body parser for the post requests
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
@@ -36,8 +41,9 @@ app.use(bodyParser.json());
 // Select static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', mainRouter);
+app.use('/quiniela', quinielaRouter);
 app.use('/api', apiRouter);
+app.use('/', mainRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

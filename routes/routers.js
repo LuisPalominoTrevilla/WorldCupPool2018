@@ -11,7 +11,63 @@ router.get('/', function(req, res, next) {
 
 /* GET login */
 router.get('/login', function(req, res, next) {
-  res.send('Aqui se inicia sesión');
+  var msg = req.flash('msg');
+  res.render('Start/login', {expressFlash: msg});
+});
+
+/* POST login */
+router.post('/login', function(req, res, next) {
+  var mysql = require('mysql');
+  
+  // Get POST parameters
+  var username = req.body.username;
+  var pswd = req.body.password;
+
+  if (username != "" && pswd != ""){    // Check if username and password are not empty
+    // Retrieve hashed password from database
+    pool.getConnection(function(err, con) {
+      sql = "SELECT password, code, event_name, background, start_date FROM user JOIN quiniela ON quiniela_id = code NATURAL JOIN event WHERE username = " + mysql.escape(username);
+      con.query(sql, function(err, result) {
+        if(err) throw err;
+        if(result.length > 0){    // Check if the result query had a field
+          var hash = result[0].password;    // Get the password from the user
+          // Get other information about the quiniela and event
+          var quiniela = result[0].code;
+          var event = result[0].event_name;
+          var background = result[0].background;
+          var start_date = result[0].start_date;
+
+          bcrypt.compare(pswd, hash, function(err, doesMatch){    // Compare password retrieved from db with provided password
+            // The user was registered
+            if (doesMatch){
+              // Set up the session and send user to their dashboard
+              req.session.authenticated = true;
+              req.session.username = username;
+              req.session.quiniela = quiniela;
+              req.session.event = event;
+              req.session.background = background;
+              req.session.event_date = start_date;
+
+              res.redirect('/quiniela');
+            }else{
+              // Password was not correct
+              req.flash('msg', 'Usuario o Contraseña incorrectos');
+              res.redirect('/login');
+            }
+           });
+        }else{
+          // There was no username registered
+          req.flash('msg', 'Usuario o Contraseña incorrectos');
+          res.redirect('/login');
+        }
+      });
+    });
+    
+  }else{
+    // Username or password were empty
+    req.flash('msg', 'Por favor proporcione un usuario y contraseña');
+    res.redirect('/login');
+  }
 });
 
 /* GET register */
@@ -49,7 +105,7 @@ router.post('/register', function(req, res, next) {
 });
 
 /* GET quiniela */
-router.get('/quiniela', function(req, res, next) {
+router.get('/cquiniela', function(req, res, next) {
   res.render('Start/quiniela.html');
 });
 
@@ -103,25 +159,5 @@ router.get('/success', function(req, res, next) {
   var new_code = req.query.code;
   res.render('Start/success', {code: new_code});
 });
-
-/* router.get('/:id', function(req, res, next) {
-  var id = req.params.id;
-  if(req.session && req.session.id == id){
-    res.send('El valor que mandaste es ' + id);
-  }
-  next();
-}); */
-
-/* router.get('/login', function(req, res, next) {
-  bcrypt.hash('themaster', 11, function( err, bcryptedPassword) {
-    bcrypt.compare('themaster', bcryptedPassword, function(err, doesMatch){
-      if (doesMatch){
-         res.send(' Si es');
-      }else{
-         res.send('No es');
-      }
-     });
- });
-}); */
 
 module.exports = router;
