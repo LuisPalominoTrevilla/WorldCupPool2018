@@ -118,8 +118,28 @@
     color: #fff;
 }
 
+/* CONTENT GENERAL STYLE */
 
+.main-wrapper{
+    padding: 1rem;
+}
 
+.flag-img{
+    max-width: 2rem;
+    margin-right: 1rem;
+}
+
+[v-cloak] { display:none; }
+
+#groups-tables table{
+    background-color: #fff;
+}
+
+#groups-tables table th{
+    font-family: 'Titillium Web', sans-serif;
+    background-color: #043c60;
+    color: #fff;
+}
 
 @media all and (max-width: 767px) {
     .event-name{
