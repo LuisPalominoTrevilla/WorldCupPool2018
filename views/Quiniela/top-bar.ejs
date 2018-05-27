@@ -1,0 +1,61 @@
+<div class="container-fluid header">
+    <div class="top-bar">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-md-4 col-12 event-name">
+                    <p><%= event %></p>
+                </div>
+
+                <div class="col-md-4 col-6 text-center time">
+                    <p>Tiempo para la competencia: <span >00:00:00</span></p>
+                </div>
+
+                <div class="col-md-4 col-6 user-info">
+                    <p>Puntaje: <span>0</span></p>
+                    <div class="dropdown text-right">
+                        <a class="btn dropdown-toggle user-btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <%= username %>
+                        </a>
+                        
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="/quiniela/logout">Logout</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="participants-bar">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-2 leaderboard">
+                    <img src="/images/Quiniela/trophy.gif" alt="leaderboard" title="posiciones">
+                </div>
+                <div class="col-10">
+                    <div class="competitors">
+                        <% for(var i = 0; i < competitors.length; i++) {%>
+                        <a class="btn" title="visitar quiniela" href="/quiniela/users/<%= competitors[i].username %>" target="__blank"> <%= competitors[i].username %> </a>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <ul class="nav nav-tabs justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="group-phase" href="/quiniela">Predicción Fase de Grupos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="knockout-stage" href="#">Predicción Knockout Stage</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="worldcup-groups" href="#">Grupos del Mundial</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

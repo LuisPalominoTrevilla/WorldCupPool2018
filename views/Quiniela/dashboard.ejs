@@ -19,35 +19,7 @@
         </style>
     </head>
     <body>
-        <div class="container-fluid header">
-            <div class="top-bar">
-                <div class="row">
-                    <div class="col-md-4">
-                            <div class="event_name">
-                                <p><%= event %></p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 text-center">
-                            <p>Tiempo hasta la competencia: <span id="time">00:00:00</span></p>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="dropdown text-right">
-                                    <a class="btn dropdown-toggle user-btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <%= username %>
-                                    </a>
-                                    
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" href="#">Logout</a>
-                                    </div>
-                            </div>
-                        </div>
-                </div>
-            </div>
-            <div class="participants-bar">
-
-            </div>
-        </div>
-        
+        <% include top-bar.ejs %>
         
     </body>
 </html>

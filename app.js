@@ -52,6 +52,11 @@ var authenticate = function(req, res, next){
     req.flash('msg', 'Por favor inicia sesión antes de continuar');
     res.redirect('/login');
     return;
+  }else if(req.url === '/quiniela/logout' && (!req.session || !req.session.authenticated || req.session.master)){
+    res.status(403);
+    req.flash('msg', 'Por favor inicia sesión antes de continuar');
+    res.redirect('/login');
+    return;
   }
   
   next();
