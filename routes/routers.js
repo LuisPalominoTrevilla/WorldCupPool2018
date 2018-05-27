@@ -28,12 +28,13 @@ router.post('/login', function(req, res, next) {
     console.log(pool._allConnections.length);
     pool.getConnection(function(err, con) {
       console.log(pool._allConnections.length);
-      sql = "SELECT password, code, event_name, background, start_date FROM user LEFT JOIN quiniela ON quiniela_id = code LEFT JOIN event ON event.event_id = quiniela.event_id WHERE username = " + mysql.escape(username);
+      sql = "SELECT user_id, password, code, event_name, background, start_date FROM user LEFT JOIN quiniela ON quiniela_id = code LEFT JOIN event ON event.event_id = quiniela.event_id WHERE username = " + mysql.escape(username);
       con.query(sql, function(err, result) {
         if(err) throw err;
         if(result.length > 0){    // Check if the result query had a field
           var hash = result[0].password;    // Get the password from the user
           // Get other information about the quiniela and event
+          var user_id = result[0].user_id;
           var quiniela = result[0].code;
           var event = result[0].event_name;
           var background = result[0].background;
@@ -57,6 +58,7 @@ router.post('/login', function(req, res, next) {
                 req.session.regenerate(function(err){
                   req.session.authenticated = true;
                   req.session.username = username;
+                  req.session.uid = user_id;
                   req.session.quiniela = quiniela;
                   req.session.event = event;
                   req.session.master = false;

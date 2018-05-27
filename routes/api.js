@@ -87,4 +87,31 @@ router.get('/groups', function(req, res, next) {
   });
 });
 
+/* GET user matches with bets */
+router.get('/matches/:mt', function(req, res, next) {
+  var mysql = require('mysql');
+  // Handle unauthorized access
+  if(!req.session || !req.session.authenticated || req.session.master){
+    res.status(403);
+    req.flash('msg', 'Por favor inicia sesión antes de continuar');
+    res.redirect('/login');
+    return;
+  }
+  var match_type = req.params.mt;
+  pool.getConnection(function(err, con) {
+    if(err) throw err;
+    sql = `SELECT h.name AS home, a.name AS away, IFNULL(m.local_goals, 0) AS goals_home, IFNULL(m.away_goals, 0) AS goals_away, 
+            m.match_date AS date_match, m.result_id AS result, m.match_status, b.predicted_result, b.points FROM matches m 
+            JOIN team h ON m.home_team = h.code JOIN team a ON m.away_team = a.code LEFT JOIN 
+            (SELECT bet.respective_match, bet.predicted_result, IFNULL(bet.points, 0) points FROM bet WHERE bet.user= ` + mysql.escape(req.session.uid) + ` ) b 
+            ON m.match_id = b.respective_match WHERE m.match_type=`+ mysql.escape(match_type) +` ORDER BY m.match_date;`
+    con.query(sql, function(err, result) {
+      con.release();
+      if(err) throw err;
+      res.json(result);
+    });
+  });
+  
+});
+
 module.exports = router;
