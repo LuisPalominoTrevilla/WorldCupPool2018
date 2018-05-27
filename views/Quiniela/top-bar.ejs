@@ -12,7 +12,6 @@
                 </div>
 
                 <div class="col-md-4 col-6 user-info">
-                    <p>Puntaje: <span>0</span></p>
                     <div class="dropdown text-right">
                         <a class="btn dropdown-toggle user-btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <%= username %>
@@ -22,6 +21,7 @@
                             <a class="dropdown-item" href="/quiniela/logout">Logout</a>
                         </div>
                     </div>
+                    <p>Puntaje: <span>0</span></p>
                 </div>
 
             </div>
@@ -45,13 +45,13 @@
                 <div class="col-12">
                     <ul class="nav nav-tabs justify-content-center">
                         <li class="nav-item">
-                            <a class="nav-link active" id="group-phase" href="/quiniela">Predicción Fase de Grupos</a>
+                            <a class="nav-link active" id="group-stage" href="/quiniela">Predicción Fase de Grupos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="knockout-stage" href="#">Predicción Knockout Stage</a>
+                            <a class="nav-link" id="knockout-stage" href="/quiniela/knockout">Predicción Knockout Stage</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="worldcup-groups" href="#">Grupos del Mundial</a>
+                            <a class="nav-link" id="worldcup-groups" href="/quiniela/groups">Grupos del Mundial</a>
                         </li>
                     </ul>
                 </div>

@@ -44,30 +44,27 @@ router.post('/login', function(req, res, next) {
             
             // If the master root account is trying to connect
             if(username === 'root' && doesMatch){
-              if(req.session){
-                req.session.regenerate(function(err){
-                  req.session.authenticated = true;
-                  req.session.username = username;
-                  req.session.master = true;
-                  res.redirect('/quiniela/master');
-                });
-              }
+              req.session.regenerate(function(err){
+                req.session.authenticated = true;
+                req.session.username = username;
+                req.session.master = true;
+                res.redirect('/quiniela/master');
+              });
               
             }else{
               if (doesMatch && quiniela != null){
                 // Set up the session and send user to their dashboard
-                if(req.session){
-                  req.session.regenerate(function(err){
-                    req.session.authenticated = true;
-                    req.session.username = username;
-                    req.session.quiniela = quiniela;
-                    req.session.event = event;
-                    req.session.background = background;
-                    req.session.event_date = start_date;
-      
-                    res.redirect('/quiniela');
-                  });
-                }
+                req.session.regenerate(function(err){
+                  req.session.authenticated = true;
+                  req.session.username = username;
+                  req.session.quiniela = quiniela;
+                  req.session.event = event;
+                  req.session.master = false;
+                  req.session.background = background;
+                  req.session.event_date = start_date;
+    
+                  res.redirect('/quiniela');
+                });
                 
               }else{
                 // Password was not correct

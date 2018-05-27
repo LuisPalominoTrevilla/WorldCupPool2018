@@ -58,6 +58,7 @@
 
 .dropdown-menu{
     background-color: #a82308;
+    min-width: 6rem !important;
 }
 
 .dropdown-item{
@@ -123,6 +124,9 @@
 @media all and (max-width: 767px) {
     .event-name{
         text-align: center;
+    }
+    .leaderboard img{
+        width: 3rem;
     }
 }
 
