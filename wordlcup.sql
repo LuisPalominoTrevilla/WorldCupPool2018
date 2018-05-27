@@ -73,6 +73,14 @@ CREATE TABLE team(
     ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=INNODB, CHARACTER SET=UTF8;
 
+CREATE TABLE match_type(
+    match_type_id TINYINT(1) UNSIGNED NOT NULL,
+    name VARCHAR(32) NOT NULL,
+    PRIMARY KEY (match_type_id)
+) ENGINE=INNODB, CHARACTER SET=UTF8;
+
+INSERT INTO match_type VALUES (1, 'Fase de Grupos'), (2, 'Octavos'), (3, 'Cuartos'), (4, 'Semifinal'), (5, 'Final');
+
 CREATE TABLE matches(
     match_id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     home_team CHAR(3) NOT NULL,
@@ -82,12 +90,15 @@ CREATE TABLE matches(
     match_date DATETIME,
     result_id TINYINT(1) UNSIGNED,
     match_status TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
+    match_type TINYINT(1) UNSIGNED NOT NULL DEFAULT 1,
     PRIMARY KEY (match_id),
     CONSTRAINT home_fk FOREIGN KEY (home_team) REFERENCES team(code)
     ON UPDATE CASCADE ON DELETE CASCADE,
     CONSTRAINT away_fk FOREIGN KEY (away_team) REFERENCES team(code)
     ON UPDATE CASCADE ON DELETE CASCADE,
     CONSTRAINT res_fk FOREIGN KEY (result_id) REFERENCES result(result_id)
+    ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT mch_type_fk FOREIGN KEY (match_type) REFERENCES match_type(match_type_id)
     ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=INNODB, CHARACTER SET=UTF8;
 
