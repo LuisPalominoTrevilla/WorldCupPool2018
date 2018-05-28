@@ -100,7 +100,7 @@ router.get('/matches/:mt', function(req, res, next) {
   var match_type = req.params.mt;
   pool.getConnection(function(err, con) {
     if(err) throw err;
-    sql = `SELECT h.name AS home, h.flag AS home_flag, a.name AS away, a.flag AS away_flag, IFNULL(m.local_goals, 0) AS goals_home, IFNULL(m.away_goals, 0) AS goals_away, 
+    sql = `SELECT m.match_id, h.name AS home, h.flag AS home_flag, a.name AS away, a.flag AS away_flag, IFNULL(m.local_goals, 0) AS goals_home, IFNULL(m.away_goals, 0) AS goals_away, 
             m.match_date AS date_match, m.result_id AS result, m.match_status, b.predicted_result, b.points FROM matches m 
             JOIN team h ON m.home_team = h.code JOIN team a ON m.away_team = a.code LEFT JOIN 
             (SELECT bet.respective_match, bet.predicted_result, IFNULL(bet.points, 0) points FROM bet WHERE bet.user= ` + mysql.escape(req.session.uid) + ` ) b 

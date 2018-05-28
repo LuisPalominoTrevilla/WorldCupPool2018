@@ -25,36 +25,36 @@
 
         <div class="container main-wrapper">
             <div class="row" id="matches_bets">
-                <div class="col-lg-4 col-md-6 col-12 match_card">
+                <div class="col-lg-4 col-md-6 col-12 match_card" v-for="match in matches">
                     <div class="card">
-                        <h5 class="card-header unplayed">Fase de grupos</h5>
+                        <h5 class="card-header" v-bind:class="{unplayed: match.match_status == 0, played: match.match_status == 1}">Partido <span>{{match.match_id}}</span></h5>
                         <div class="card-body text-center">
                             <div class="match_info">
-                                <img src="/images/Flags/RUS.png">
-                                <p>Rusia <span class="score">0</span></p>
+                                <img v-bind:src="match.home_flag">
+                                <p v-bind:class="{match_winner:match.result === 1}">{{match.home}} <span class="score">{{match.goals_home}}</span></p>
                                 <span> - </span>
-                                <p><span class="score">0</span> Saudi Arabia</p>
-                                <img src="/images/Flags/SAU.png">
-                                <p class="match_date">04-29-2018 5:00:00</p>
+                                <p v-bind:class="{match_winner:match.result === 2}"><span class="score">{{match.goals_away}}</span> {{match.away}}</p>
+                                <img v-bind:src="match.away_flag">
+                                <p class="match_date">{{match.date_match}}</p>
                             </div>
                             <h3>Predicción</h3>
                             <div class="vote">
                                 <div class="parent">
-                                    <img src="/images/Flags/RUS.png" title="gana local">
-                                    <img src="/images/check.png" class="check" title="gana local" v-if="predicted_result === 1">
+                                    <img v-bind:src="match.home_flag" v-bind:title="'gana ' + match.home">
+                                    <img src="/images/check.png" class="check" v-bind:title="'gana ' + match.home" v-if="match.predicted_result === 1">
                                 </div>
 
                                 <div class="parent">
                                     <img src="/images/tie.png" title="empate">
-                                    <img src="/images/check.png" class="check" title="empate" v-if="predicted_result === 0">
+                                    <img src="/images/check.png" class="check" title="empate" v-if="match.predicted_result === 0">
                                 </div>
 
                                 <div class="parent">
-                                    <img src="/images/Flags/SAU.png" title="gana visitante">
-                                    <img src="/images/check.png" class="check" title="gana visitante" v-if="predicted_result === 2">
+                                    <img v-bind:src="match.away_flag" v-bind:title="'gana ' + match.away">
+                                    <img src="/images/check.png" class="check" v-bind:title="'gana ' + match.away" v-if="match.predicted_result === 2">
                                 </div>
                             </div>
-                            <p class="points-assigned" >Puntos: <span>0</span></p>
+                            <p class="points-assigned" >Puntos: <span>{{match.points}}</span></p>
                         </div>
                     </div>
                 </div>

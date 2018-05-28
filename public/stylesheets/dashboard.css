@@ -168,8 +168,13 @@
     margin-bottom: 1.5rem;
 }
 
+.match_winner{
+    font-weight: bold;
+}
+
 .parent{
     position: relative;
+    margin-right: .3rem;
 }
 
 .check{
