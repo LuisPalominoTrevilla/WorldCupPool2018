@@ -2,12 +2,14 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-         <script src="/Javascript/jQuery/jquery-3.3.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+        <script src="/Javascript/jQuery/jquery-3.3.1.min.js"></script>
         <title><%= username %></title>
         <script src="/Javascript/popper.min.js"></script>
         <link rel="stylesheet" type="text/css" href="/Bootstrap/css/bootstrap.min.css">
         <script src="/Bootstrap/js/bootstrap.js"></script>
         <link rel="stylesheet" type="text/css" href="/stylesheets/dashboard.css">
+        <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet"> 
         <style>
             body{
                 background-image: url('<%= background %>');
@@ -20,6 +22,47 @@
     </head>
     <body>
         <% include top-bar.ejs %>
+
+        <div class="container main-wrapper">
+            <div class="row" id="matches_bets">
+                <div class="col-lg-4 col-md-6 col-12 match_card">
+                    <div class="card">
+                        <h5 class="card-header unplayed">Fase de grupos</h5>
+                        <div class="card-body text-center">
+                            <div class="match_info">
+                                <img src="/images/Flags/RUS.png">
+                                <p>Rusia <span class="score">0</span></p>
+                                <span> - </span>
+                                <p><span class="score">0</span> Saudi Arabia</p>
+                                <img src="/images/Flags/SAU.png">
+                                <p class="match_date">04-29-2018 5:00:00</p>
+                            </div>
+                            <h3>Predicción</h3>
+                            <div class="vote">
+                                <div class="parent">
+                                    <img src="/images/Flags/RUS.png" title="gana local">
+                                    <img src="/images/check.png" class="check" title="gana local" v-if="predicted_result === 1">
+                                </div>
+
+                                <div class="parent">
+                                    <img src="/images/tie.png" title="empate">
+                                    <img src="/images/check.png" class="check" title="empate" v-if="predicted_result === 0">
+                                </div>
+
+                                <div class="parent">
+                                    <img src="/images/Flags/SAU.png" title="gana visitante">
+                                    <img src="/images/check.png" class="check" title="gana visitante" v-if="predicted_result === 2">
+                                </div>
+                            </div>
+                            <p class="points-assigned" >Puntos: <span>0</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                
+
+            </div>
+        </div>
         
         <script src="/Javascript/groupstage.js"></script>
     </body>

@@ -22,11 +22,13 @@
 .event-name{
     font-size: 18px;
     margin-top: .2rem;
+    font-family: 'Libre Baskerville', serif;
 }
 
 .time{
     margin-top: .3rem;
     font-size: 16px;
+    font-family: 'Libre Baskerville', serif;
 }
 
 .time span{
@@ -58,7 +60,7 @@
 
 .dropdown-menu{
     background-color: #a82308;
-    min-width: 6rem !important;
+    min-width: 3rem !important;
 }
 
 .dropdown-item{
@@ -124,12 +126,87 @@
     padding: 1rem;
 }
 
+[v-cloak] { display:none; }
+
+/* Rounds of 16 */
+
+.match_card{
+    margin-bottom: 2rem;
+}
+
+.card-header{
+    color: #fff;
+    font-family: 'Libre Baskerville', serif;
+}
+
+.card-header.played{
+    background-color: #39820f;
+}
+
+.card-header.unplayed{
+    background-color: #ad3216;
+}
+
+.match_info > *{
+    display: inline-block;
+}
+
+.match_info img{
+    width: 2rem;
+}
+
+.match_info .match_date{
+    display: block;
+    font-weight: bold;
+}
+
+.card-body h3{
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'Libre Baskerville', serif;
+    border-bottom: 1px solid rgb(153, 153, 153);
+    margin-bottom: 1.5rem;
+}
+
+.parent{
+    position: relative;
+}
+
+.check{
+    position: absolute;
+    width: 3.3rem !important;
+    top: -.3rem;
+    left: .4rem;
+    z-index: 1;
+}
+
+.vote > *{
+    display: inline-block;
+}
+
+.vote img{
+    width: 4rem;
+}
+
+.vote img:hover{
+    cursor: pointer;
+}
+
+.points-assigned{
+    font-size: 16px;
+    margin-top: 2rem;
+}
+
+.points-assigned span{
+    color: #861b06;
+}
+
+/* GROUPS */
+
 .flag-img{
     max-width: 2rem;
     margin-right: 1rem;
 }
-
-[v-cloak] { display:none; }
 
 #groups-tables table{
     background-color: #fff;
@@ -147,6 +224,12 @@
     }
     .leaderboard img{
         width: 3rem;
+    }
+    .dropdown-menu{
+        width: 4.7rem;
+    }
+    .dropdown-menu .dropdown-item{
+        padding-left: .4rem !important;
     }
 }
 
