@@ -231,3 +231,19 @@ INSERT INTO matches (home_team, away_team, match_date) VALUES ('JPN', 'POL', '20
 
 INSERT INTO matches (home_team, away_team, match_date) VALUES ('ENG', 'BEL', '2018-06-28 13:00:00');
 INSERT INTO matches (home_team, away_team, match_date) VALUES ('PAN', 'TUN', '2018-06-28 13:00:00');
+
+DELIMITER //
+
+CREATE TRIGGER update_points
+AFTER UPDATE
+    ON matches FOR EACH ROW
+
+BEGIN
+    UPDATE bet 
+    SET bet.points = IF(NEW.result_id = bet.predicted_result, 3, 0)
+    WHERE bet.respective_match = NEW.match_id;
+END;    //
+
+DELIMITER ;
+
+UPDATE matches SET local_goals=3, away_goals=2, result_id=1, match_status=1 WHERE match_id=1;
