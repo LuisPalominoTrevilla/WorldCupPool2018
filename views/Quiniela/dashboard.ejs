@@ -26,8 +26,8 @@
         <div class="container main-wrapper">
             <div class="row" id="matches_bets">
                 <div class="col-lg-4 col-md-6 col-12 match_card" v-for="match in matches">
-                    <div class="card">
-                        <h5 class="card-header" v-bind:class="{unplayed: match.match_status == 0, played: match.match_status == 1}">Partido <span>{{match.match_id}}</span></h5>
+                    <div class="card" v-bind:id="match.match_id">
+                        <h5 class="card-header" v-bind:class="{unassigned: match.predicted_result === null && match.match_status === 0, bet: match.predicted_result !== null && match.match_status === 0, lost: match.points === 0 && match.match_status === 1, won: match.points === 3 && match.match_status === 1}">Fase de Grupos: Partido <span>{{match.match_id}}</span></h5>
                         <div class="card-body text-center">
                             <div class="match_info">
                                 <img v-bind:src="match.home_flag">
@@ -54,7 +54,7 @@
                                     <img src="/images/check.png" class="check" v-bind:title="'gana ' + match.away" v-if="match.predicted_result === 2">
                                 </div>
                             </div>
-                            <p class="points-assigned" >Puntos: <span>{{match.points}}</span></p>
+                            <p class="points-assigned" v-bind:class="{points_lost: match.points === 0, points_won: match.points === 3}">Puntos: <span>{{match.points}}</span></p>
                         </div>
                     </div>
                 </div>

@@ -139,12 +139,20 @@
     font-family: 'Libre Baskerville', serif;
 }
 
-.card-header.played{
+.card-header.won{
     background-color: #39820f;
 }
 
-.card-header.unplayed{
+.card-header.bet{
+    background-color: #cc9e07;
+}
+
+.card-header.lost{
     background-color: #ad3216;
+}
+
+.card-header.unassigned{
+    background-color: #116494;
 }
 
 .match_info > *{
@@ -202,8 +210,12 @@
     margin-top: 2rem;
 }
 
-.points-assigned span{
+.points_lost span{
     color: #861b06;
+}
+
+.points_won span{
+    color: #39820f;
 }
 
 /* GROUPS */
