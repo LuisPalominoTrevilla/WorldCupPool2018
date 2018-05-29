@@ -235,6 +235,17 @@
     color: #fff;
 }
 
+
+/* PARTICIPANTS POOLS */
+.participant-title{
+    font-weight: bold;
+    font-size: 25px;
+    margin: 2rem 0 2rem 0;
+    color: #f1f1f1;
+    font-family: 'Libre Baskerville', serif;
+
+}
+
 @media all and (max-width: 767px) {
     .event-name{
         text-align: center;

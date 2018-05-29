@@ -111,7 +111,32 @@ router.get('/matches/:mt', function(req, res, next) {
       res.json(result);
     });
   });
-  
+});
+
+/* GET participant matches with bets */
+router.get('/partmatches/:uid', function(req, res, next) {
+  var mysql = require('mysql');
+  // Handle unauthorized access
+  if(!req.session || !req.session.authenticated || req.session.master){
+    res.status(403);
+    req.flash('msg', 'Por favor inicia sesión antes de continuar');
+    res.redirect('/login');
+    return;
+  }
+  var user_id = req.params.uid;
+  pool.getConnection(function(err, con) {
+    if(err) throw err;
+    sql = `SELECT m.match_id, h.name AS home, h.flag AS home_flag, a.name AS away, a.flag AS away_flag, IFNULL(m.local_goals, 0) AS goals_home, IFNULL(m.away_goals, 0) AS goals_away, 
+            m.match_date AS date_match, m.result_id AS result, m.match_status, b.predicted_result, IFNULL(b.points, 0) points FROM matches m 
+            JOIN team h ON m.home_team = h.code JOIN team a ON m.away_team = a.code LEFT JOIN 
+            (SELECT bet.respective_match, bet.predicted_result, bet.points FROM bet WHERE bet.user= ` + mysql.escape(user_id) + ` ) b 
+            ON m.match_id = b.respective_match ORDER BY m.match_date;`
+    con.query(sql, function(err, result) {
+      con.release();
+      if(err) throw err;
+      res.json(result);
+    });
+  });
 });
 
 module.exports = router;

@@ -48,7 +48,11 @@ app.use('/', mainRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   res.status(404);
-  res.render('notfound', {code: '404', url: req.url});
+  if(req.session && req.session.authenticated && !req.session.master){
+    res.render('notfound', {code: '404', url: req.url, destination: '/quiniela'});
+  }else{
+    res.render('notfound', {code: '404', url: req.url, destination: '/'});
+  }
 });
 
 module.exports = app;

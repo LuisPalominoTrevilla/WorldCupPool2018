@@ -69,6 +69,33 @@ router.get('/groups', function(req, res, next) {
   });
 });
 
+/* GET quiniela from other participants */
+router.get('/users/:uname', function(req, res, next) {
+  // Handle unauthorized access
+  if(!req.session || !req.session.authenticated || req.session.master){
+    res.status(403);
+    req.flash('msg', 'Por favor inicia sesión antes de continuar');
+    res.redirect('/login');
+    return;
+  }
+  // Get participant
+  var participant_name = req.params.uname;
+  pool.getConnection(function(err, con) {
+    console.log(pool._allConnections.length);
+    if(err) throw err;
+    sql = "SELECT user_id FROM user WHERE username = " + mysql.escape(participant_name);
+    con.query(sql, function(err, result) {
+      con.release();
+      if(result.length > 0){
+        res.render('Quiniela/participant', {background: req.session.background, username: participant_name, uid: result[0].user_id});
+      }else{
+        res.redirect('/notfound');
+      }
+      if(err) throw err;
+    });
+  });
+});
+
 /* GET master account content */
 router.get('/master', function(req, res, next) {
   // Handle unauthorized access
