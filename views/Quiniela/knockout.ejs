@@ -21,6 +21,7 @@
         </style>
     </head>
     <body>
+        <p id="anchor-match" style="display: none"><%= match %></p>
         <% include top-bar.ejs %>
 
         <div class="container main-wrapper">
@@ -40,17 +41,17 @@
                             <h3>Predicción</h3>
                             <div class="vote">
                                 <div class="parent">
-                                    <img v-bind:src="match.home_flag" v-bind:title="'gana ' + match.home">
+                                    <img v-bind:src="match.home_flag" v-bind:title="'gana ' + match.home" v-on:click="selectBet(1, match.match_id, match.active)">
                                     <img src="/images/check.png" class="check" v-bind:title="'gana ' + match.home" v-if="match.predicted_result === 1">
                                 </div>
 
                                 <div class="parent">
-                                    <img src="/images/tie.png" title="empate">
+                                    <img src="/images/tie.png" title="empate" v-on:click="selectBet(0, match.match_id, match.active)">
                                     <img src="/images/check.png" class="check" title="empate" v-if="match.predicted_result === 0">
                                 </div>
 
                                 <div class="parent">
-                                    <img v-bind:src="match.away_flag" v-bind:title="'gana ' + match.away">
+                                    <img v-bind:src="match.away_flag" v-bind:title="'gana ' + match.away" v-on:click="selectBet(2, match.match_id, match.active)">
                                     <img src="/images/check.png" class="check" v-bind:title="'gana ' + match.away" v-if="match.predicted_result === 2">
                                 </div>
                             </div>
@@ -76,17 +77,17 @@
                             <h3>Predicción</h3>
                             <div class="vote">
                                 <div class="parent">
-                                    <img v-bind:src="match.home_flag" v-bind:title="'gana ' + match.home">
+                                    <img v-bind:src="match.home_flag" v-bind:title="'gana ' + match.home" v-on:click="selectBet(1, match.match_id, match.active)">
                                     <img src="/images/check.png" class="check" v-bind:title="'gana ' + match.home" v-if="match.predicted_result === 1">
                                 </div>
 
                                 <div class="parent">
-                                    <img src="/images/tie.png" title="empate">
+                                    <img src="/images/tie.png" title="empate" v-on:click="selectBet(0, match.match_id, match.active)">
                                     <img src="/images/check.png" class="check" title="empate" v-if="match.predicted_result === 0">
                                 </div>
 
                                 <div class="parent">
-                                    <img v-bind:src="match.away_flag" v-bind:title="'gana ' + match.away">
+                                    <img v-bind:src="match.away_flag" v-bind:title="'gana ' + match.away" v-on:click="selectBet(2, match.match_id, match.active)">
                                     <img src="/images/check.png" class="check" v-bind:title="'gana ' + match.away" v-if="match.predicted_result === 2">
                                 </div>
                             </div>
@@ -112,17 +113,17 @@
                             <h3>Predicción</h3>
                             <div class="vote">
                                 <div class="parent">
-                                    <img v-bind:src="match.home_flag" v-bind:title="'gana ' + match.home">
+                                    <img v-bind:src="match.home_flag" v-bind:title="'gana ' + match.home" v-on:click="selectBet(1, match.match_id, match.active)">
                                     <img src="/images/check.png" class="check" v-bind:title="'gana ' + match.home" v-if="match.predicted_result === 1">
                                 </div>
 
                                 <div class="parent">
-                                    <img src="/images/tie.png" title="empate">
+                                    <img src="/images/tie.png" title="empate" v-on:click="selectBet(0, match.match_id, match.active)">
                                     <img src="/images/check.png" class="check" title="empate" v-if="match.predicted_result === 0">
                                 </div>
 
                                 <div class="parent">
-                                    <img v-bind:src="match.away_flag" v-bind:title="'gana ' + match.away">
+                                    <img v-bind:src="match.away_flag" v-bind:title="'gana ' + match.away" v-on:click="selectBet(2, match.match_id, match.active)">
                                     <img src="/images/check.png" class="check" v-bind:title="'gana ' + match.away" v-if="match.predicted_result === 2">
                                 </div>
                             </div>
@@ -148,17 +149,17 @@
                             <h3>Predicción</h3>
                             <div class="vote">
                                 <div class="parent">
-                                    <img v-bind:src="match.home_flag" v-bind:title="'gana ' + match.home">
+                                    <img v-bind:src="match.home_flag" v-bind:title="'gana ' + match.home" v-on:click="selectBet(1, match.match_id, match.active)">
                                     <img src="/images/check.png" class="check" v-bind:title="'gana ' + match.home" v-if="match.predicted_result === 1">
                                 </div>
 
                                 <div class="parent">
-                                    <img src="/images/tie.png" title="empate">
+                                    <img src="/images/tie.png" title="empate" v-on:click="selectBet(0, match.match_id, match.active)">
                                     <img src="/images/check.png" class="check" title="empate" v-if="match.predicted_result === 0">
                                 </div>
 
                                 <div class="parent">
-                                    <img v-bind:src="match.away_flag" v-bind:title="'gana ' + match.away">
+                                    <img v-bind:src="match.away_flag" v-bind:title="'gana ' + match.away" v-on:click="selectBet(2, match.match_id, match.active)">
                                     <img src="/images/check.png" class="check" v-bind:title="'gana ' + match.away" v-if="match.predicted_result === 2">
                                 </div>
                             </div>

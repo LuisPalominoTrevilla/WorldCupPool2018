@@ -12,6 +12,7 @@ router.get('/', function(req, res, next) {
     res.redirect('/login');
     return;
   }
+  var anchor = req.query.match;
   // Get participants
   pool.getConnection(function(err, con) {
     console.log(pool._allConnections.length);
@@ -21,7 +22,7 @@ router.get('/', function(req, res, next) {
       sql = "SELECT IFNULL(SUM(b.points), 0) AS points FROM user u LEFT JOIN bet b ON u.user_id = b.user WHERE u.user_id=" + mysql.escape(req.session.uid);
       con.query(sql, function(err, points) {
         con.release();
-        res.render('Quiniela/dashboard', {username: req.session.username, background: req.session.background, event: req.session.event, competitors: result, points: points[0].points});
+        res.render('Quiniela/dashboard', {username: req.session.username, background: req.session.background, event: req.session.event, competitors: result, points: points[0].points, match: anchor});
         if(err) throw err;
       });
     });
@@ -37,6 +38,7 @@ router.get('/knockout', function(req, res, next) {
     res.redirect('/login');
     return;
   }
+  var anchor = req.query.match;
   // Get participants
   pool.getConnection(function(err, con) {
     console.log(pool._allConnections.length);
@@ -46,7 +48,7 @@ router.get('/knockout', function(req, res, next) {
       sql = "SELECT IFNULL(SUM(b.points), 0) AS points FROM user u LEFT JOIN bet b ON u.user_id = b.user WHERE u.user_id=" + mysql.escape(req.session.uid);
       con.query(sql, function(err, points) {
         con.release();
-        res.render('Quiniela/knockout', {username: req.session.username, background: req.session.background, event: req.session.event, competitors: result, points: points[0].points});
+        res.render('Quiniela/knockout', {username: req.session.username, background: req.session.background, event: req.session.event, competitors: result, points: points[0].points, match: anchor});
         if(err) throw err;
       });
       
@@ -131,13 +133,5 @@ router.get('/logout', function(req, res, next) {
   req.session.destroy();
   res.redirect('/login');
 });
-
-/* router.get('/:id', function(req, res, next) {
-  var id = req.params.id;
-  if(req.session && req.session.id == id){
-    res.send('El valor que mandaste es ' + id);
-  }
-  next();
-}); */
 
 module.exports = router;

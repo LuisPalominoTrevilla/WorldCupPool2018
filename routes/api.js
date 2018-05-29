@@ -100,8 +100,8 @@ router.get('/matches/:mt', function(req, res, next) {
   var match_type = req.params.mt;
   pool.getConnection(function(err, con) {
     if(err) throw err;
-    sql = `SELECT m.match_id, h.name AS home, h.flag AS home_flag, a.name AS away, a.flag AS away_flag, IFNULL(m.local_goals, 0) AS goals_home, IFNULL(m.away_goals, 0) AS goals_away, 
-            m.match_date AS date_match, m.result_id AS result, m.match_status, b.predicted_result, IFNULL(b.points, 0) points FROM matches m 
+    sql = `SELECT t.active, m.match_id, h.name AS home, h.flag AS home_flag, a.name AS away, a.flag AS away_flag, IFNULL(m.local_goals, 0) AS goals_home, IFNULL(m.away_goals, 0) AS goals_away, 
+            m.match_date AS date_match, m.result_id AS result, m.match_status, b.predicted_result, IFNULL(b.points, 0) points FROM matches m JOIN match_type t ON m.match_type = t.match_type_id 
             JOIN team h ON m.home_team = h.code JOIN team a ON m.away_team = a.code LEFT JOIN 
             (SELECT bet.respective_match, bet.predicted_result, bet.points FROM bet WHERE bet.user= ` + mysql.escape(req.session.uid) + ` ) b 
             ON m.match_id = b.respective_match WHERE m.match_type=`+ mysql.escape(match_type) +` ORDER BY m.match_date;`
@@ -135,6 +135,66 @@ router.get('/partmatches/:uid', function(req, res, next) {
       con.release();
       if(err) throw err;
       res.json(result);
+    });
+  });
+});
+
+router.post('/placebet', function(req, res, next) {
+  var mysql = require('mysql');
+  // Handle unauthorized access
+  if(!req.session || !req.session.authenticated || req.session.master){
+    res.status(403);
+    req.flash('msg', 'Por favor inicia sesión antes de continuar');
+    res.redirect('/login');
+    return;
+  }
+  var match = parseInt(req.body.match);
+  var user = parseInt(req.session.uid);
+  var bet = parseInt(req.body.bet);
+  var type = 0;
+  
+  pool.getConnection(function(err, con) {
+    if(err) throw err;
+    // Select the type of the match and if match is still active
+    sql = "SELECT t.match_type_id, t.active FROM matches m JOIN match_type t ON m.match_type = t.match_type_id WHERE m.match_id = " + mysql.escape(match);
+    con.query(sql, function(err, result) {
+      if(err) throw err;
+      // Check if there is match exists and it is still active
+      if(result.length && result[0].active){
+        sql="SELECT b.points FROM bet b JOIN matches m ON b.respective_match = m.match_id JOIN user u ON u.user_id = b.user WHERE b.respective_match = " + mysql.escape(match) + " AND b.user = " + mysql.escape(user);
+        con.query(sql, function(err, result) {
+          if(err) throw err;
+          // Check if there was a record already inserted
+          var query = "";
+          if(result.length){
+            // Record found
+            query = "UPDATE bet SET predicted_result = " + mysql.escape(bet) + " WHERE respective_match = " + mysql.escape(match) + " AND user =  " + mysql.escape(user);
+            con.query(query, [values], function(err, resp) {
+              if(err) throw err;
+              con.release();
+
+              res.send(true);
+            });
+          }else{
+            // No record found
+            query = "INSERT INTO bet (respective_match, user, predicted_result) VALUES ?";
+            var values = [];
+            values.push([match, user, bet]);
+            con.query(query, [values], function(err, resp) {
+              if(err) throw err;
+              con.release();
+
+              res.send(true);
+            });
+          }
+          
+        });
+        
+      }else{
+        // It does not exisrt or result not active
+        con.release();
+        res.send(false);
+      }
     });
   });
 });
