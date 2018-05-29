@@ -18,9 +18,12 @@ router.get('/', function(req, res, next) {
     if(err) throw err;
     sql = "SELECT username FROM user u JOIN quiniela q ON u.quiniela_id = q.code WHERE q.code = " + mysql.escape(req.session.quiniela) +  " AND username != " + mysql.escape(req.session.username);
     con.query(sql, function(err, result) {
-      con.release();
-      res.render('Quiniela/dashboard', {username: req.session.username, background: req.session.background, event: req.session.event, competitors: result});
-      if(err) throw err;
+      sql = "SELECT IFNULL(SUM(b.points), 0) AS points FROM user u LEFT JOIN bet b ON u.user_id = b.user WHERE u.user_id=" + mysql.escape(req.session.uid);
+      con.query(sql, function(err, points) {
+        con.release();
+        res.render('Quiniela/dashboard', {username: req.session.username, background: req.session.background, event: req.session.event, competitors: result, points: points[0].points});
+        if(err) throw err;
+      });
     });
   });
 });
@@ -40,9 +43,13 @@ router.get('/knockout', function(req, res, next) {
     if(err) throw err;
     sql = "SELECT username FROM user u JOIN quiniela q ON u.quiniela_id = q.code WHERE q.code = " + mysql.escape(req.session.quiniela) +  " AND username != " + mysql.escape(req.session.username);
     con.query(sql, function(err, result) {
-      con.release();
-      res.render('Quiniela/knockout', {username: req.session.username, background: req.session.background, event: req.session.event, competitors: result});
-      if(err) throw err;
+      sql = "SELECT IFNULL(SUM(b.points), 0) AS points FROM user u LEFT JOIN bet b ON u.user_id = b.user WHERE u.user_id=" + mysql.escape(req.session.uid);
+      con.query(sql, function(err, points) {
+        con.release();
+        res.render('Quiniela/knockout', {username: req.session.username, background: req.session.background, event: req.session.event, competitors: result, points: points[0].points});
+        if(err) throw err;
+      });
+      
     });
   });
 });
@@ -62,9 +69,13 @@ router.get('/groups', function(req, res, next) {
     if(err) throw err;
     sql = "SELECT username FROM user u JOIN quiniela q ON u.quiniela_id = q.code WHERE q.code = " + mysql.escape(req.session.quiniela) +  " AND username != " + mysql.escape(req.session.username);
     con.query(sql, function(err, result) {
-      con.release();
-      res.render('Quiniela/groups', {username: req.session.username, background: req.session.background, event: req.session.event, competitors: result});
-      if(err) throw err;
+      sql = "SELECT IFNULL(SUM(b.points), 0) AS points FROM user u LEFT JOIN bet b ON u.user_id = b.user WHERE u.user_id=" + mysql.escape(req.session.uid);
+      con.query(sql, function(err, points) {
+        con.release();
+        res.render('Quiniela/groups', {username: req.session.username, background: req.session.background, event: req.session.event, competitors: result, points: points[0].points});
+        if(err) throw err;
+      });
+      
     });
   });
 });
