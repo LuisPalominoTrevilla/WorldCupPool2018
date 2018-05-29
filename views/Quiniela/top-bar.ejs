@@ -31,12 +31,14 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-2 leaderboard">
-                    <img src="/images/Quiniela/trophy.gif" alt="leaderboard" title="posiciones">
+                    <img src="/images/Quiniela/trophy.gif" alt="leaderboard" title="posiciones" data-toggle="modal" data-target="#exampleModal">
                 </div>
                 <div class="col-10">
                     <div class="competitors">
                         <% for(var i = 0; i < competitors.length; i++) {%>
+                        <% if(competitors[i].username !== username) { %>
                         <a class="btn" title="visitar quiniela" href="/quiniela/users/<%= competitors[i].username %>" target="__blank"> <%= competitors[i].username %> </a>
+                        <% } %>
                         <% } %>
                     </div>
                 </div>
@@ -57,5 +59,26 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ranking Quiniela</h5>
+        </div>
+        <div class="modal-body">
+          <ul>
+            <% for(var i = 0; i < competitors.length; i++) { %>
+                <li><%= competitors[i].username%>: <%= competitors[i].points %></li>
+            <% } %>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
     </div>
 </div>
