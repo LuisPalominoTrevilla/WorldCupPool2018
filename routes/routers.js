@@ -11,6 +11,12 @@ router.get('/', function(req, res, next) {
 
 /* GET login */
 router.get('/login', function(req, res, next) {
+  // Check if a session is already there, itś not the master account and it has the remember option checked
+  if(req.session && !req.session.master && req.session.remember){
+    // Send to the quiniela page
+    res.redirect('/quiniela');
+    return;
+  }
   var msg = req.flash('msg');
   res.render('Start/login', {expressFlash: msg});
 });
@@ -22,6 +28,9 @@ router.post('/login', function(req, res, next) {
   // Get POST parameters
   var username = req.body.username;
   var pswd = req.body.password;
+  var remember_me;
+
+  remember_me = (req.body.remember)? true: false;
 
   if (username != "" && pswd != ""){    // Check if username and password are not empty
     // Retrieve hashed password from database
@@ -64,6 +73,7 @@ router.post('/login', function(req, res, next) {
                   req.session.master = false;
                   req.session.background = background;
                   req.session.event_date = start_date;
+                  req.session.remember = remember_me;
     
                   res.redirect('/quiniela');
                 });
