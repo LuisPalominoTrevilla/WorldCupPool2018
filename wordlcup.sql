@@ -45,7 +45,7 @@ CREATE TABLE user(
     ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=INNODB, CHARACTER SET=UTF8;
 
-INSERT INTO user (user_type, username, password) VALUES (1, 'root', '$2a$04$YcS86bxGTLV/aHDFfRv.ju3xwyaq3nUUXmA5kIZeWwhJpwQ8oTVg6');
+INSERT INTO user (user_type, username, password) VALUES (1, 'root', '$2b$11$3yi4iB.peepw.ig1N5fdAOsOcBpHo3A4DaapTbDjKMjDbJO.S64ua');
 
 CREATE TABLE groups(
     group_id MEDIUMINT UNSIGNED NOT NULL,
@@ -80,7 +80,7 @@ CREATE TABLE match_type(
     PRIMARY KEY (match_type_id)
 ) ENGINE=INNODB, CHARACTER SET=UTF8;
 
-INSERT INTO match_type VALUES (1, 'Fase de Grupos'), (2, 'Octavos'), (3, 'Cuartos'), (4, 'Semifinal'), (5, 'Final');
+INSERT INTO match_type (match_type_id, name) VALUES (1, 'Fase de Grupos'), (2, 'Octavos'), (3, 'Cuartos'), (4, 'Semifinal'), (5, 'Final');
 
 CREATE TABLE matches(
     match_id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -245,5 +245,3 @@ BEGIN
 END;    //
 
 DELIMITER ;
-
-UPDATE matches SET local_goals=3, away_goals=2, result_id=1, match_status=1 WHERE match_id=1;
