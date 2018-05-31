@@ -35,7 +35,7 @@ CREATE TABLE quiniela(
 CREATE TABLE user(
     user_id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     user_type TINYINT(1) UNSIGNED NOT NULL,
-    username VARCHAR (32) NOT NULL UNIQUE,
+    username VARCHAR (32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL UNIQUE,
     password varchar(60) NOT NULL,
     quiniela_id CHAR(5),
     PRIMARY KEY (user_id),
