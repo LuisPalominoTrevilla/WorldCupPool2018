@@ -1,21 +1,21 @@
 //14 de junio de 2018 10:00AM
 //formato: 00:00:00
 
-/*var countdownSec = 0;
+var countdownSec = 0;
 var countdownMin = 0;
 var countdownHr = 10;
 var countdownDay = 14;
 var countdownMonth = 6;
-*/
+
 
 var timeformatted;
-
+/*
 var countdownSec = 0;
 var countdownMin = 39;
 var countdownHr = 19;
 var countdownDay = 30;
 var countdownMonth = 5;
-
+*/
 
 var sec = 0;
 var min = 0;
@@ -62,8 +62,8 @@ function updateCountdown(){
     hrleft += (countdownDay - day) * 24;
     hrleft += (countdownHr - hr);
     
-    minleft = ((countdownMin - min) -1);
-    if (minleft < 0 ) minleft = 0;
+    minleft = (60 + (countdownMin - min) -1);
+    
     secleft = (60 + (countdownSec - sec));
     
     if(minleft < 10){
