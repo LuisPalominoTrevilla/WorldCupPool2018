@@ -76,8 +76,11 @@ function updateCountdown(){
     if(hrleft < 10){
         hrleft = "0" + hrleft;
     }
+
+    var dayleft = Math.floor(hrleft / 24);
+    hrleft = hrleft % 24;
     
-    $('#time').html(hrleft + ":" + minleft + ":" + secleft);
+    $('#time').html(dayleft + " días " + hrleft + " horas " + minleft + " minutos " + secleft + " segundos");
     //console.log(hrleft + ":" + minleft + ":" + secleft);
             
 }

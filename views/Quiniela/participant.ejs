@@ -22,7 +22,6 @@
                 cursor: default;
             }
 
-
         </style>
     </head>
     <body>
@@ -40,7 +39,7 @@
         <div class="container main-wrapper">
             <div class="row" id="matches_bets">
                 <div class="col-lg-4 col-md-6 col-12 match_card" v-for="match in matches">
-                    <div class="card" v-bind:id="match.match_id" v-cloak>
+                    <div class="card" v-bind:id="match.match_id" v-cloak v-if="match.active === 0">
                         <h5 class="card-header" v-bind:class="{unassigned: match.predicted_result === null && match.match_status === 0, bet: match.predicted_result !== null && match.match_status === 0, lost: match.points === 0 && match.match_status === 1, won: match.points === 3 && match.match_status === 1}">Partido <span>{{match.match_id}}</span></h5>
                         <div class="card-body text-center">
                             <div class="match_info">
