@@ -104,7 +104,7 @@ router.get('/matches/:mt', function(req, res, next) {
             m.match_date AS date_match, m.result_id AS result, m.match_status, b.predicted_result, IFNULL(b.points, 0) points FROM matches m JOIN match_type t ON m.match_type = t.match_type_id 
             JOIN team h ON m.home_team = h.code JOIN team a ON m.away_team = a.code LEFT JOIN 
             (SELECT bet.respective_match, bet.predicted_result, bet.points FROM bet WHERE bet.user= ` + mysql.escape(req.session.uid) + ` ) b 
-            ON m.match_id = b.respective_match WHERE m.match_type=`+ mysql.escape(match_type) +` ORDER BY m.match_date;`
+            ON m.match_id = b.respective_match WHERE m.match_type=`+ mysql.escape(match_type) +` ORDER BY m.match_date, m.match_id ASC;`
     con.query(sql, function(err, result) {
       con.release();
       if(err) throw err;
@@ -130,7 +130,7 @@ router.get('/partmatches/:uid', function(req, res, next) {
             m.match_date AS date_match, m.result_id AS result, m.match_status, b.predicted_result, IFNULL(b.points, 0) points FROM matches m JOIN match_type t ON m.match_type = t.match_type_id 
             JOIN team h ON m.home_team = h.code JOIN team a ON m.away_team = a.code LEFT JOIN 
             (SELECT bet.respective_match, bet.predicted_result, bet.points FROM bet WHERE bet.user= ` + mysql.escape(user_id) + ` ) b 
-            ON m.match_id = b.respective_match ORDER BY m.match_date;`
+            ON m.match_id = b.respective_match ORDER BY m.match_date, m.match_id ASC;`
     con.query(sql, function(err, result) {
       con.release();
       if(err) throw err;
