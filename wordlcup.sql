@@ -219,3 +219,14 @@ INSERT INTO matches (home_team, away_team, match_date) VALUES ('JPN', 'POL', '20
 
 INSERT INTO matches (home_team, away_team, match_date) VALUES ('ENG', 'BEL', '2018-06-28 13:00:00');
 INSERT INTO matches (home_team, away_team, match_date) VALUES ('PAN', 'TUN', '2018-06-28 13:00:00');
+
+INSERT INTO matches (home_team, away_team, match_date, match_type) VALUES ('URY', 'PRT', '2018-06-30 13:00:00', 2);
+INSERT INTO matches (home_team, away_team, match_date, match_type) VALUES ('ESP', 'RUS', '2018-07-01 09:00:00', 2);
+INSERT INTO matches (home_team, away_team, match_date, match_type) VALUES ('BRA', 'MEX', '2018-07-02 09:00:00', 2);
+INSERT INTO matches (home_team, away_team, match_date, match_type) VALUES ('BEL', 'JPN', '2018-07-02 13:00:00', 2);
+INSERT INTO matches (home_team, away_team, match_date, match_type) VALUES ('SWE', 'CHE', '2018-07-03 09:00:00', 2);
+INSERT INTO matches (home_team, away_team, match_date, match_type) VALUES ('COL', 'ENG', '2018-07-03 13:00:00', 2);
+
+INSERT INTO matches (home_team, away_team, match_date, match_type) VALUES ('URY', 'FRA', '2018-07-06 09:00:00', 3);
+INSERT INTO matches (home_team, away_team, match_date, match_type) VALUES ('BRA', '', '2018-07-06 13:00:00', 3);
+
