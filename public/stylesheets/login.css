@@ -1,10 +1,15 @@
 body{
-    background-image: url("/images/Quiniela/salah.jpg");
+    background-image: url("/images/Quiniela/chilena.jpg");
     background-repeat:no-repeat;
     background-size:cover;
     background-attachment: fixed;
-    font-size: 20px;
+    font-size: 22px;
 	font-family: "Open Sans",serif;
+}
+
+#flash_msg{
+    color: red;
+    font-size: 18px;
 }
 
 .vertical-center {
@@ -25,25 +30,28 @@ h1{
     margin-bottom: 2rem;
 }
 
+.form-group{
+    padding: 0 8rem 0 8rem;
+}
+
 .container{
     padding-bottom: 5px;
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.9);
     width:600px;
     max-width: 80vw;
-    
 }
 
 #evento{
     font-size:15px;
 }
 
-.help-text{
-    padding: 5px;
-}
-
 .btn-danger{
     margin-right: 10px;
+}
+
+.btn{
+    margin-top: 20px !important;
 }
 
 @media all and (min-width: 960px) {
@@ -53,28 +61,30 @@ h1{
 }
  
 @media all and (max-width: 959px) and (min-width: 600px) {
-    body{
+    body, #flash_msg{
         font-size: 16px;
     }
     h1{
         font-size: 32px;
     }
+    .form-group{
+        padding: 0;
+    }
 }
  
 @media all and (max-width: 599px) and (min-width: 320px) {
-    body{
+    body, #flash_msg{
         font-size: 14px;
     }
     h1{
         font-size: 28px;
     }
-    .form-inline{
-        margin-top: 1rem !important;
-        margin-bottom: 1rem !important;
-    }
     .btn{
         width: 6rem;
         font-size: 1rem;
+    }
+    .form-group{
+        padding: 0;
     }
  
 }

@@ -35,7 +35,7 @@ CREATE TABLE quiniela(
 CREATE TABLE user(
     user_id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     user_type TINYINT(1) UNSIGNED NOT NULL,
-    username VARCHAR (32) NOT NULL UNIQUE,
+    username VARCHAR (32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL UNIQUE,
     password varchar(60) NOT NULL,
     quiniela_id CHAR(5),
     PRIMARY KEY (user_id),
@@ -45,7 +45,7 @@ CREATE TABLE user(
     ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=INNODB, CHARACTER SET=UTF8;
 
-INSERT INTO user (user_type, username, password) VALUES (1, 'root', '$2a$04$YcS86bxGTLV/aHDFfRv.ju3xwyaq3nUUXmA5kIZeWwhJpwQ8oTVg6');
+INSERT INTO user (user_type, username, password) VALUES (1, 'root', '$2b$11$3yi4iB.peepw.ig1N5fdAOsOcBpHo3A4DaapTbDjKMjDbJO.S64ua');
 
 CREATE TABLE groups(
     group_id MEDIUMINT UNSIGNED NOT NULL,
@@ -73,6 +73,15 @@ CREATE TABLE team(
     ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=INNODB, CHARACTER SET=UTF8;
 
+CREATE TABLE match_type(
+    match_type_id TINYINT(1) UNSIGNED NOT NULL,
+    name VARCHAR(32) NOT NULL,
+    active TINYINT(1) UNSIGNED NOT NULL DEFAULT 1,
+    PRIMARY KEY (match_type_id)
+) ENGINE=INNODB, CHARACTER SET=UTF8;
+
+INSERT INTO match_type (match_type_id, name) VALUES (1, 'Fase de Grupos'), (2, 'Octavos'), (3, 'Cuartos'), (4, 'Semifinal'), (5, 'Final');
+
 CREATE TABLE matches(
     match_id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     home_team CHAR(3) NOT NULL,
@@ -82,12 +91,15 @@ CREATE TABLE matches(
     match_date DATETIME,
     result_id TINYINT(1) UNSIGNED,
     match_status TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
+    match_type TINYINT(1) UNSIGNED NOT NULL DEFAULT 1,
     PRIMARY KEY (match_id),
     CONSTRAINT home_fk FOREIGN KEY (home_team) REFERENCES team(code)
     ON UPDATE CASCADE ON DELETE CASCADE,
     CONSTRAINT away_fk FOREIGN KEY (away_team) REFERENCES team(code)
     ON UPDATE CASCADE ON DELETE CASCADE,
     CONSTRAINT res_fk FOREIGN KEY (result_id) REFERENCES result(result_id)
+    ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT mch_type_fk FOREIGN KEY (match_type) REFERENCES match_type(match_type_id)
     ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=INNODB, CHARACTER SET=UTF8;
 
@@ -230,3 +242,16 @@ INSERT INTO matches (home_team, away_team, match_date, match_type) VALUES ('COL'
 INSERT INTO matches (home_team, away_team, match_date, match_type) VALUES ('URY', 'FRA', '2018-07-06 09:00:00', 3);
 INSERT INTO matches (home_team, away_team, match_date, match_type) VALUES ('BRA', '', '2018-07-06 13:00:00', 3);
 
+DELIMITER //
+
+CREATE TRIGGER update_points
+AFTER UPDATE
+    ON matches FOR EACH ROW
+
+BEGIN
+    UPDATE bet 
+    SET bet.points = IF(NEW.result_id = bet.predicted_result, 3, 0)
+    WHERE bet.respective_match = NEW.match_id;
+END;    //
+
+DELIMITER ;

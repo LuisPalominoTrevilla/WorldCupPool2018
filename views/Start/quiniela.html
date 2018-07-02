@@ -11,30 +11,33 @@
     </head>
     <body>
         
-        <form class="container" method="post" action='/quiniela'>
-            <h1>Quinielas Online</h1>
-            <div class="form-text help-text">
-                <p>Seleccione el <b>evento</b> de su quiniela e ingrese el <b>monto</b> con el que cada participante entrará. Al terminar, presione generar.</p>
-            </div>
-        
-            <div>
-                <div class="form-inline my-5">    
-                    
-                    <label class="control-label label col-md-2 col-sm-5 col-xs-5 my-1" for="evento">Evento:</label>
-                    <select class="custom-select col-md-4 col-sm-7 col-xs-7 my-1" id="evento" name="event">
-                            <option selected>Evento</option>
-                    </select>
-                    
-                    <label class="control-label label col-md-2 col-sm-5 col-xs-5 my-1" for="monto">Monto:</label>
-                    <input class="form-control col-md-4 col-sm-7 col-xs-7 my-1" id="monto" aria-describedby="help" placeholder="$0.0" name="monto">
-                    
+        <div class="vertical-center">
+            <form class="container" method="post" action='/cquiniela'>
+                <h1>Crear Quiniela</h1>
+                <div class="form-text help-text">
+                    <p>Seleccione el <b>evento</b> de su quiniela e ingrese el <b>monto</b> con el que cada participante entrará. <br> Al terminar, presione generar.</p>
                 </div>
-
-                <div class="row align-items-center justify-content-center">
-                    <button type="submit" class="btn btn-success btn-lg my-1 disabled" id="button">Generar</button>         
+            
+                <div>
+                    <div class="form-inline my-5">    
+                        
+                        <label class="control-label label col-md-2 col-sm-5 col-xs-5 my-1" for="evento">Evento:</label>
+                        <select class="custom-select col-md-4 col-sm-7 col-xs-7 my-1" id="evento" name="event">
+                                <option selected>Evento</option>
+                        </select>
+                        
+                        <label class="control-label label col-md-2 col-sm-5 col-xs-5 my-1" for="monto">Monto:</label>
+                        <input class="form-control col-md-4 col-sm-7 col-xs-7 my-1" id="monto" aria-describedby="help" placeholder="$0.0" name="monto">
+                        
+                    </div>
+    
+                    <div class="row align-items-center justify-content-center">
+                        <button type="button" class="btn btn-danger btn-lg my-1" onclick="window.location.href='/'">Regresar</button>
+                        <button type="submit" class="btn btn-success btn-lg my-1 disabled" id="button">Generar</button>         
+                    </div>
                 </div>
-            </div>
-        </form>    
+            </form> 
+        </div>   
         
     </body>
     

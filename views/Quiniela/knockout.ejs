@@ -1,0 +1,177 @@
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+        <script src="/Javascript/jQuery/jquery-3.3.1.min.js"></script>
+        <title><%= username %></title>
+        <script src="/Javascript/popper.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="/Bootstrap/css/bootstrap.min.css">
+        <script src="/Bootstrap/js/bootstrap.js"></script>
+        <link rel="stylesheet" type="text/css" href="/stylesheets/dashboard.css">
+        <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet"> 
+        <style>
+            body{
+                background-image: url('<%= background %>');
+                background-repeat:no-repeat;
+                background-size:cover;
+                background-attachment: fixed;
+                background-position: right bottom;
+            }
+        </style>
+    </head>
+    <body>
+        <p id="anchor-match" style="display: none"><%= match %></p>
+        <% include top-bar.ejs %>
+
+        <div class="container main-wrapper">
+            <div class="row" id="round16">
+                <div class="col-lg-4 col-md-6 col-12 match_card" v-for="match in matches">
+                    <div class="card" v-bind:id="match.match_id" v-cloak>
+                        <h5 class="card-header" v-bind:class="{unassigned: match.predicted_result === null && match.match_status === 0, bet: match.predicted_result !== null && match.match_status === 0, lost: match.points === 0 && match.match_status === 1, won: match.points === 3 && match.match_status === 1}">Octavos: Partido <span>{{match.match_id}}</span></h5>
+                        <div class="card-body text-center">
+                            <div class="match_info">
+                                <img v-bind:src="match.home_flag">
+                                <p v-bind:class="{match_winner:match.result === 1}">{{match.home}} <span class="score">{{match.goals_home}}</span></p>
+                                <span> - </span>
+                                <p v-bind:class="{match_winner:match.result === 2}"><span class="score">{{match.goals_away}}</span> {{match.away}}</p>
+                                <img v-bind:src="match.away_flag">
+                                <p class="match_date">{{match.date_match}}</p>
+                            </div>
+                            <h3>Predicción</h3>
+                            <div class="vote">
+                                <div class="parent">
+                                    <img v-bind:src="match.home_flag" v-bind:title="'gana ' + match.home" v-on:click="selectBet(1, match.match_id, match.active)">
+                                    <img src="/images/check.png" class="check" v-bind:title="'gana ' + match.home" v-if="match.predicted_result === 1">
+                                </div>
+
+                                <div class="parent">
+                                    <img src="/images/tie.png" title="empate" v-on:click="selectBet(0, match.match_id, match.active)">
+                                    <img src="/images/check.png" class="check" title="empate" v-if="match.predicted_result === 0">
+                                </div>
+
+                                <div class="parent">
+                                    <img v-bind:src="match.away_flag" v-bind:title="'gana ' + match.away" v-on:click="selectBet(2, match.match_id, match.active)">
+                                    <img src="/images/check.png" class="check" v-bind:title="'gana ' + match.away" v-if="match.predicted_result === 2">
+                                </div>
+                            </div>
+                            <p class="points-assigned" v-bind:class="{points_lost: match.points === 0, points_won: match.points === 3}">Puntos: <span>{{match.points}}</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" id="quarter">
+                <div class="col-lg-4 col-md-6 col-12 match_card" v-for="match in matches">
+                    <div class="card" v-bind:id="match.match_id" v-cloak>
+                        <h5 class="card-header" v-bind:class="{unassigned: match.predicted_result === null && match.match_status === 0, bet: match.predicted_result !== null && match.match_status === 0, lost: match.points === 0 && match.match_status === 1, won: match.points === 3 && match.match_status === 1}">Cuartos: Partido <span>{{match.match_id}}</span></h5>
+                        <div class="card-body text-center">
+                            <div class="match_info">
+                                <img v-bind:src="match.home_flag">
+                                <p v-bind:class="{match_winner:match.result === 1}">{{match.home}} <span class="score">{{match.goals_home}}</span></p>
+                                <span> - </span>
+                                <p v-bind:class="{match_winner:match.result === 2}"><span class="score">{{match.goals_away}}</span> {{match.away}}</p>
+                                <img v-bind:src="match.away_flag">
+                                <p class="match_date">{{match.date_match}}</p>
+                            </div>
+                            <h3>Predicción</h3>
+                            <div class="vote">
+                                <div class="parent">
+                                    <img v-bind:src="match.home_flag" v-bind:title="'gana ' + match.home" v-on:click="selectBet(1, match.match_id, match.active)">
+                                    <img src="/images/check.png" class="check" v-bind:title="'gana ' + match.home" v-if="match.predicted_result === 1">
+                                </div>
+
+                                <div class="parent">
+                                    <img src="/images/tie.png" title="empate" v-on:click="selectBet(0, match.match_id, match.active)">
+                                    <img src="/images/check.png" class="check" title="empate" v-if="match.predicted_result === 0">
+                                </div>
+
+                                <div class="parent">
+                                    <img v-bind:src="match.away_flag" v-bind:title="'gana ' + match.away" v-on:click="selectBet(2, match.match_id, match.active)">
+                                    <img src="/images/check.png" class="check" v-bind:title="'gana ' + match.away" v-if="match.predicted_result === 2">
+                                </div>
+                            </div>
+                            <p class="points-assigned" v-bind:class="{points_lost: match.points === 0, points_won: match.points === 3}">Puntos: <span>{{match.points}}</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" id="semi">
+                <div class="col-lg-4 col-md-6 col-12 match_card" v-for="match in matches">
+                    <div class="card" v-bind:id="match.match_id" v-cloak>
+                        <h5 class="card-header" v-bind:class="{unassigned: match.predicted_result === null && match.match_status === 0, bet: match.predicted_result !== null && match.match_status === 0, lost: match.points === 0 && match.match_status === 1, won: match.points === 3 && match.match_status === 1}">Semifinal: Partido <span>{{match.match_id}}</span></h5>
+                        <div class="card-body text-center">
+                            <div class="match_info">
+                                <img v-bind:src="match.home_flag">
+                                <p v-bind:class="{match_winner:match.result === 1}">{{match.home}} <span class="score">{{match.goals_home}}</span></p>
+                                <span> - </span>
+                                <p v-bind:class="{match_winner:match.result === 2}"><span class="score">{{match.goals_away}}</span> {{match.away}}</p>
+                                <img v-bind:src="match.away_flag">
+                                <p class="match_date">{{match.date_match}}</p>
+                            </div>
+                            <h3>Predicción</h3>
+                            <div class="vote">
+                                <div class="parent">
+                                    <img v-bind:src="match.home_flag" v-bind:title="'gana ' + match.home" v-on:click="selectBet(1, match.match_id, match.active)">
+                                    <img src="/images/check.png" class="check" v-bind:title="'gana ' + match.home" v-if="match.predicted_result === 1">
+                                </div>
+
+                                <div class="parent">
+                                    <img src="/images/tie.png" title="empate" v-on:click="selectBet(0, match.match_id, match.active)">
+                                    <img src="/images/check.png" class="check" title="empate" v-if="match.predicted_result === 0">
+                                </div>
+
+                                <div class="parent">
+                                    <img v-bind:src="match.away_flag" v-bind:title="'gana ' + match.away" v-on:click="selectBet(2, match.match_id, match.active)">
+                                    <img src="/images/check.png" class="check" v-bind:title="'gana ' + match.away" v-if="match.predicted_result === 2">
+                                </div>
+                            </div>
+                            <p class="points-assigned" v-bind:class="{points_lost: match.points === 0, points_won: match.points === 3}">Puntos: <span>{{match.points}}</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" id="final">
+                <div class="col-lg-4 col-md-6 col-12 match_card" v-for="match in matches">
+                    <div class="card" v-bind:id="match.match_id" v-cloak>
+                        <h5 class="card-header" v-bind:class="{unassigned: match.predicted_result === null && match.match_status === 0, bet: match.predicted_result !== null && match.match_status === 0, lost: match.points === 0 && match.match_status === 1, won: match.points === 3 && match.match_status === 1}">Final: Partido <span>{{match.match_id}}</span></h5>
+                        <div class="card-body text-center">
+                            <div class="match_info">
+                                <img v-bind:src="match.home_flag">
+                                <p v-bind:class="{match_winner:match.result === 1}">{{match.home}} <span class="score">{{match.goals_home}}</span></p>
+                                <span> - </span>
+                                <p v-bind:class="{match_winner:match.result === 2}"><span class="score">{{match.goals_away}}</span> {{match.away}}</p>
+                                <img v-bind:src="match.away_flag">
+                                <p class="match_date">{{match.date_match}}</p>
+                            </div>
+                            <h3>Predicción</h3>
+                            <div class="vote">
+                                <div class="parent">
+                                    <img v-bind:src="match.home_flag" v-bind:title="'gana ' + match.home" v-on:click="selectBet(1, match.match_id, match.active)">
+                                    <img src="/images/check.png" class="check" v-bind:title="'gana ' + match.home" v-if="match.predicted_result === 1">
+                                </div>
+
+                                <div class="parent">
+                                    <img src="/images/tie.png" title="empate" v-on:click="selectBet(0, match.match_id, match.active)">
+                                    <img src="/images/check.png" class="check" title="empate" v-if="match.predicted_result === 0">
+                                </div>
+
+                                <div class="parent">
+                                    <img v-bind:src="match.away_flag" v-bind:title="'gana ' + match.away" v-on:click="selectBet(2, match.match_id, match.active)">
+                                    <img src="/images/check.png" class="check" v-bind:title="'gana ' + match.away" v-if="match.predicted_result === 2">
+                                </div>
+                            </div>
+                            <p class="points-assigned" v-bind:class="{points_lost: match.points === 0, points_won: match.points === 3}">Puntos: <span>{{match.points}}</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        <script src="/Javascript/knockoutstage.js"></script>
+        <script src="/Javascript/countdown.js"></script>
+    </body>
+</html>

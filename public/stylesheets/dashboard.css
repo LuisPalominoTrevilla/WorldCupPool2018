@@ -1,0 +1,282 @@
+
+
+#flash_msg{
+    color: red;
+    font-size: 18px;
+}
+
+/* HEADER STYLE */
+.header{
+    padding: 0;
+}
+
+.header p{
+    margin-bottom: 0;
+}
+
+.top-bar{
+    background-color: #fff;
+    padding: .3rem;
+}
+
+.event-name{
+    font-size: 18px;
+    margin-top: .2rem;
+    font-family: 'Libre Baskerville', serif;
+}
+
+.time{
+    margin-top: .3rem;
+    font-size: 16px;
+    font-family: 'Libre Baskerville', serif;
+}
+
+.time span{
+    color: #a82308;
+}
+
+.user-info{
+    text-align: right;
+    font-size: 16px;
+}
+.user-info > *{
+    display: inline;
+}
+
+.user-info span{
+    color: #a82308;
+    margin-right: 1rem;
+}
+
+.user-btn{
+    color: #fff;
+    background-color: #043c60;
+}
+
+.user-btn:hover{
+    color: #fff;
+    background-color: #1c5b83;
+}
+
+.dropdown-menu{
+    background-color: #a82308;
+    min-width: 3rem !important;
+}
+
+.dropdown-item{
+    color: #fff;
+}
+
+.dropdown-item:hover{
+    background-color: #6b1908;
+    color: #fff;
+}
+
+/* PARTICIPANTS STYLE */
+
+.participants-bar{
+    background-color: #043c60;
+    background-image: url('/images/Events/blue.png')
+}
+
+.leaderboard img{
+    width: 5rem;
+}
+
+.leaderboard img:hover{
+    cursor: pointer;
+}
+
+.competitors{
+    margin-top: .8rem;
+    overflow-y: auto;
+    max-height: 4rem;
+    scroll-behavior: smooth;
+}
+
+.competitors a{
+    color: #fff !important;
+    background-color: #861b06;
+    padding: .7rem 1.3rem .7rem 1.3rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+}
+
+.competitors a:hover{
+    background-color: #a82308;
+}
+
+.competitors a:hover{
+    cursor: pointer;
+}
+
+/* NAVIGATION BAR STYLE */
+
+.nav-link{
+    color: #fff;
+}
+
+.nav-link:hover{
+    color: #fff;
+}
+
+/* CONTENT GENERAL STYLE */
+
+.main-wrapper{
+    padding: 1rem;
+}
+
+[v-cloak] { display:none; }
+
+/* Rounds of 16 */
+
+.match_card{
+    margin-bottom: 2rem;
+}
+
+.card-header{
+    color: #fff;
+    font-family: 'Libre Baskerville', serif;
+}
+
+.card-header.won{
+    background-color: #39820f;
+}
+
+.card-header.bet{
+    background-color: #cc9e07;
+}
+
+.card-header.lost{
+    background-color: #ad3216;
+}
+
+.card-header.unassigned{
+    background-color: #116494;
+}
+
+.match_info > *{
+    display: inline-block;
+}
+
+.match_info img{
+    width: 2rem;
+}
+
+.match_info .match_date{
+    display: block;
+    font-weight: bold;
+}
+
+.card-body h3{
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'Libre Baskerville', serif;
+    border-bottom: 1px solid rgb(153, 153, 153);
+    margin-bottom: 1.5rem;
+}
+
+.match_winner{
+    font-weight: bold;
+}
+
+.parent{
+    position: relative;
+    margin-right: .3rem;
+}
+
+.check{
+    position: absolute;
+    width: 3.3rem !important;
+    top: -.3rem;
+    left: .4rem;
+    z-index: 1;
+}
+
+.vote > *{
+    display: inline-block;
+}
+
+.vote img{
+    width: 4rem;
+}
+
+.vote img:hover{
+    cursor: pointer;
+}
+
+.points-assigned{
+    font-size: 16px;
+    margin-top: 2rem;
+}
+
+.points_lost span{
+    color: #861b06;
+}
+
+.points_won span{
+    color: #39820f;
+}
+
+/* GROUPS */
+
+.flag-img{
+    max-width: 2rem;
+    margin-right: 1rem;
+}
+
+#groups-tables table{
+    background-color: #fff;
+}
+
+#groups-tables table th{
+    font-family: 'Titillium Web', sans-serif;
+    background-color: #043c60;
+    color: #fff;
+}
+
+
+/* PARTICIPANTS POOLS */
+.participant-title{
+    font-weight: bold;
+    font-size: 25px;
+    margin: 2rem 0 2rem 0;
+    color: #f1f1f1;
+    font-family: 'Libre Baskerville', serif;
+
+}
+
+@media all and (max-width: 767px) {
+    .event-name{
+        text-align: center;
+    }
+    .leaderboard img{
+        width: 3rem;
+    }
+    .dropdown-menu{
+        width: 4.7rem;
+    }
+    .dropdown-menu .dropdown-item{
+        padding-left: .4rem !important;
+    }
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}

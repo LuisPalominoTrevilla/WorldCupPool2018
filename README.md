@@ -3,6 +3,5 @@
 To run:
 
 1. clone this repository
-2. 
-3. npm install
-4. npm start
+2. npm start
+3. go to http://localhost:3000/

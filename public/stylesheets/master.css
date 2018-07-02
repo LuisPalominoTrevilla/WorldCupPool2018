@@ -1,0 +1,17 @@
+.participants-bar{
+    background-color: #043c60;
+    background-image: url('/images/Events/blue.png')
+}
+
+.participant-title{
+    font-weight: bold;
+    font-size: 25px;
+    margin: 2rem 0 2rem 0;
+    color: #f1f1f1;
+    font-family: 'Libre Baskerville', serif;
+
+}
+
+.header{
+    padding: 0;
+}

@@ -1,0 +1,84 @@
+<div class="container-fluid header">
+    <div class="top-bar">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-md-4 col-12 event-name">
+                    <p><%= event %></p>
+                </div>
+
+                <div class="col-md-4 col-6 text-center time">
+                    <p>Tiempo para la competencia: <span id="time">00:00:00</span></p>
+                </div>
+
+                <div class="col-md-4 col-6 user-info">
+                    <div class="dropdown text-right">
+                        <a class="btn dropdown-toggle user-btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <%= username %>
+                        </a>
+                        
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="/quiniela/logout">Logout</a>
+                        </div>
+                    </div>
+                    <p>Puntaje: <span><%= points %></span></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="participants-bar">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-2 leaderboard">
+                    <img src="/images/Quiniela/trophy.gif" alt="leaderboard" title="posiciones" data-toggle="modal" data-target="#exampleModal">
+                </div>
+                <div class="col-10">
+                    <div class="competitors">
+                        <% for(var i = 0; i < competitors.length; i++) {%>
+                        <% if(competitors[i].username !== username) { %>
+                        <a class="btn" title="visitar quiniela" href="/quiniela/users/<%= competitors[i].username %>" target="__blank"> <%= competitors[i].username %> </a>
+                        <% } %>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <ul class="nav nav-tabs justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="group-stage" href="/quiniela">Predicción Fase de Grupos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="knockout-stage" href="/quiniela/knockout">Predicción Knockout Stage</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="worldcup-groups" href="/quiniela/groups">Grupos del Mundial</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ranking Quiniela</h5>
+        </div>
+        <div class="modal-body">
+          <ul>
+            <% for(var i = 0; i < competitors.length; i++) { %>
+                <li><%= competitors[i].username%>: <%= competitors[i].points %></li>
+            <% } %>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,80 @@
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+         <script src="/Javascript/jQuery/jquery-3.3.1.min.js"></script>
+        <title><%= username %></title>
+        <link rel="stylesheet" type="text/css" href="/Bootstrap/css/bootstrap.min.css">
+        <script src="/Bootstrap/js/bootstrap.js"></script>
+        <link rel="stylesheet" type="text/css" href="/stylesheets/master.css">
+        <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+        <style>
+            .vote img:hover{
+                cursor: default;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid header">
+            <div class="participants-bar">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 text-center participant-title">Bienvenido <%=username%> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container main-wrapper">
+            <div class="row">
+                <div class="col-md-6">
+                    <form action="/quiniela/uMatch" method="post">
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-12">
+                                    <label for="matchSelect">Select Match:</label>
+                                    <select class="form-control" id="matchSelect" name="match">
+                                    <% for(var i = 0; i < matches.length; i++){ %>
+                                    <option value="<%= matches[i].match_id %>"> <%= matches[i].home %> vs  <%= matches[i].away %></option>
+                                    <% } %>
+                                    </select>
+                                </div>
+                                <div class="col-6 text-center">
+                                    <label for="home_goals">Home</label>
+                                    <input type="number" value="0" id="home_goals" name="hg">
+                                </div>
+                                <div class="col-6 text-center">
+                                    <label for="away_goals">Away</label>
+                                    <input type="number" value="0" id="away_goals" name="ag">
+                                </div>
+                                <div class="col-12 text-center" style="margin-top: 2rem;">
+                                        <input type="submit" class="btn btn-dark" value="Confirmar">
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <form action="/quiniela/dMatches" method="post">
+                        <div class="col-12">
+                            <label for="typedeactivate">Select Match:</label>
+                            <select class="form-control" id="typedeactivate" name="deactivate">
+                            <% for(var i = 0; i < deactivate.length; i++){ %>
+                            <option value="<%= deactivate[i].match_type_id %>"> <%= deactivate[i].name %></option>
+                            <% } %>
+                            </select>
+                        </div>
+                        <div class="col-12 text-center" style="margin-top: 2rem;">
+                            <input type="submit" class="btn btn-dark" value="Deshabilitar">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <script src=""></script>
+    </body>
+</html>

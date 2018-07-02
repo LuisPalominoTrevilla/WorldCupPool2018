@@ -2,8 +2,7 @@ $("#monto").keyup(checkInput);
 
 $("#evento").click(checkInput);
 
-
-$.getJSON("/api/events", function(data){
+$.getJSON('/api/events', function(data){
     console.log(data);
     $.each(data, function(key,value){
         $('#evento').append($('<option>', {
