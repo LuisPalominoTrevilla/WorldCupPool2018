@@ -240,7 +240,9 @@ INSERT INTO matches (home_team, away_team, match_date, match_type) VALUES ('SWE'
 INSERT INTO matches (home_team, away_team, match_date, match_type) VALUES ('COL', 'ENG', '2018-07-03 13:00:00', 2);
 
 INSERT INTO matches (home_team, away_team, match_date, match_type) VALUES ('URY', 'FRA', '2018-07-06 09:00:00', 3);
-INSERT INTO matches (home_team, away_team, match_date, match_type) VALUES ('BRA', '', '2018-07-06 13:00:00', 3);
+INSERT INTO matches (home_team, away_team, match_date, match_type) VALUES ('BRA', 'BEL', '2018-07-06 13:00:00', 3);
+INSERT INTO matches (home_team, away_team, match_date, match_type) VALUES ('SWE', 'ENG', '2018-07-07 09:00:00', 3);
+INSERT INTO matches (home_team, away_team, match_date, match_type) VALUES ('RUS', 'HRV', '2018-07-07 13:00:00', 3);
 
 DELIMITER //
 
