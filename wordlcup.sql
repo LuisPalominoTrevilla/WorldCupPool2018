@@ -247,6 +247,9 @@ INSERT INTO matches (home_team, away_team, match_date, match_type) VALUES ('RUS'
 INSERT INTO matches (home_team, away_team, match_date, match_type) VALUES ('FRA', 'BEL', '2018-07-10 13:00:00', 4);
 INSERT INTO matches (home_team, away_team, match_date, match_type) VALUES ('HRV', 'ENG', '2018-07-11 13:00:00', 4);
 
+INSERT INTO matches (home_team, away_team, match_date, match_type) VALUES ('BEL', 'ENG', '2018-07-14 09:00:00', 5);
+INSERT INTO matches (home_team, away_team, match_date, match_type) VALUES ('FRA', 'HRV', '2018-07-15 10:00:00', 5);
+
 DELIMITER //
 
 CREATE TRIGGER update_points
